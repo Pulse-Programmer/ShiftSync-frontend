@@ -114,4 +114,9 @@
   .press-effect:active {
     transform: scale(0.97);
   }
+
+  /* Safe area for mobile bottom nav */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 }
