@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Bell, LogOut, Clock, ChevronDown } from 'lucide-react';
+import { LogOut, Clock, ChevronDown } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { ThemeSwitcher } from '../ui/ThemeSwitcher';
+import { NotificationBell } from '../notifications/NotificationBell';
 import type { Location } from '../../api/types';
 import { api } from '../../api/client';
 
@@ -77,13 +78,7 @@ export function Header({ selectedLocationId, onLocationChange }: HeaderProps) {
         <div className="flex items-center gap-2">
           <ThemeSwitcher />
 
-          <button
-            className="relative p-2 rounded-lg text-text-secondary hover:text-text
-                       hover:bg-surface-hover transition-colors duration-fast"
-            aria-label="Notifications"
-          >
-            <Bell size={18} />
-          </button>
+          <NotificationBell />
 
           <div className="relative">
             <button

@@ -2,8 +2,10 @@ import { useState, useCallback } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 import { Sidebar, MobileNav } from './Sidebar';
+import { useRealtimeSync } from '../../hooks/useRealtimeSync';
 
 export function AppShell() {
+  useRealtimeSync();
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>(() => {
     try {
       return localStorage.getItem('shiftsync-location');
