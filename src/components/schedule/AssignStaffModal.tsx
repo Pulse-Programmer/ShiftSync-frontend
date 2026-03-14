@@ -14,6 +14,7 @@ import {
   CheckCircle,
   Lightbulb,
   Loader2,
+  Clock,
 } from 'lucide-react';
 import { ApiError } from '../../api/client';
 import type { ValidationResult } from '../../api/types';
@@ -184,6 +185,48 @@ export function AssignStaffModal({
             <p className="text-sm font-medium text-text">
               Constraint check for {selectedStaff.first_name} {selectedStaff.last_name}
             </p>
+
+            {/* What-if overtime indicator */}
+            {(() => {
+              const weeklyResult = validation.results.find((r) => r.constraint === 'WEEKLY_HOURS');
+              if (!weeklyResult?.details) return null;
+              const details = weeklyResult.details as { currentHours?: number; projectedTotal?: number };
+              if (details.projectedTotal == null) return null;
+              const projected = details.projectedTotal;
+              const current = details.currentHours ?? 0;
+              return (
+                <div className={`flex items-center gap-3 p-3 rounded-lg border ${
+                  projected >= 40 ? 'bg-error/10 border-error/20' :
+                  projected >= 35 ? 'bg-warning/10 border-warning/20' :
+                  'bg-surface-alt border-border'
+                }`}>
+                  <Clock size={14} className={
+                    projected >= 40 ? 'text-error' :
+                    projected >= 35 ? 'text-warning' : 'text-text-secondary'
+                  } />
+                  <div className="flex-1">
+                    <p className="text-xs text-text-secondary">
+                      Weekly hours: {current.toFixed(1)}h &rarr;{' '}
+                      <span className={`font-semibold ${
+                        projected >= 40 ? 'text-error' :
+                        projected >= 35 ? 'text-warning' : 'text-success'
+                      }`}>
+                        {projected.toFixed(1)}h
+                      </span>
+                    </p>
+                    <div className="mt-1.5 h-1.5 bg-bg rounded-full overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${
+                          projected >= 40 ? 'bg-error' :
+                          projected >= 35 ? 'bg-warning' : 'bg-success'
+                        }`}
+                        style={{ width: `${Math.min((projected / 50) * 100, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
 
             {validation.valid && !hasWarnings && (
               <div className="flex items-center gap-2 p-3 bg-success/10 border border-success/20 rounded-lg">
