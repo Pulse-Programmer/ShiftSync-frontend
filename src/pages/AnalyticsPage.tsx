@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { BarChart3, Star, Users } from 'lucide-react';
+import { ErrorState } from '../components/ui/ErrorState';
 import { DateTime } from 'luxon';
 import {
   useFairnessReport,
@@ -46,12 +47,12 @@ export function AnalyticsPage() {
 
   const { startDate, endDate } = getDateRange(range);
 
-  const { data: report, isLoading: reportLoading } = useFairnessReport(
+  const { data: report, isLoading: reportLoading, error: reportError, refetch: refetchReport } = useFairnessReport(
     selectedLocationId,
     startDate,
     endDate,
   );
-  const { data: score, isLoading: scoreLoading } = useFairnessScore(
+  const { data: score, isLoading: scoreLoading, error: scoreError } = useFairnessScore(
     selectedLocationId,
     startDate,
     endDate,
@@ -137,8 +138,13 @@ export function AnalyticsPage() {
         </div>
       )}
 
+      {/* Error */}
+      {!isLoading && (reportError || scoreError) && (
+        <ErrorState message="Failed to load analytics data" onRetry={() => refetchReport()} />
+      )}
+
       {/* Overview tab */}
-      {!isLoading && tab === 'overview' && (
+      {!isLoading && !reportError && !scoreError && tab === 'overview' && (
         <div className="space-y-5">
           {score && <FairnessScoreCard score={score} />}
 

@@ -9,6 +9,7 @@ import { CreateShiftModal } from '../components/schedule/CreateShiftModal';
 import { AssignStaffModal } from '../components/schedule/AssignStaffModal';
 import { PersonalSchedule } from '../components/schedule/PersonalSchedule';
 import { getWeekStart, prevWeek, nextWeek } from '../utils/date';
+import { ErrorState } from '../components/ui/ErrorState';
 import { DateTime } from 'luxon';
 
 interface OutletCtx {
@@ -48,8 +49,8 @@ function ManagerScheduleView({
   weekStart: string;
   onWeekChange: (ws: string) => void;
 }) {
-  const { data: schedule, isLoading: scheduleLoading } = useSchedule(locationId, weekStart);
-  const { data: shifts, isLoading: shiftsLoading } = useShifts(schedule?.id);
+  const { data: schedule, isLoading: scheduleLoading, error: scheduleError, refetch: refetchSchedule } = useSchedule(locationId, weekStart);
+  const { data: shifts, isLoading: shiftsLoading, error: shiftsError } = useShifts(schedule?.id);
   const createSchedule = useCreateSchedule();
   const publishSchedule = usePublishSchedule();
   const unpublishSchedule = useUnpublishSchedule();
@@ -200,7 +201,14 @@ function ManagerScheduleView({
         </div>
       )}
 
-      {!scheduleLoading && !schedule && (
+      {(scheduleError || shiftsError) && !scheduleLoading && !shiftsLoading && (
+        <ErrorState
+          message="Failed to load schedule data"
+          onRetry={() => refetchSchedule()}
+        />
+      )}
+
+      {!scheduleLoading && !scheduleError && !schedule && (
         <div className="text-center py-16">
           <p className="text-text-secondary mb-4">No schedule for this week yet</p>
           <button

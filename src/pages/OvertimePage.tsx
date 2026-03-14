@@ -8,6 +8,7 @@ import { OvertimeTable } from '../components/overtime/OvertimeTable';
 import { StaffHoursChart } from '../components/overtime/StaffHoursChart';
 import { StaffDetailModal } from '../components/overtime/StaffDetailModal';
 import { ProjectionsView } from '../components/overtime/ProjectionsView';
+import { ErrorState } from '../components/ui/ErrorState';
 
 type View = 'table' | 'chart' | 'projections';
 
@@ -24,11 +25,11 @@ export function OvertimePage() {
     name: string;
   } | null>(null);
 
-  const { data: weeklyData, isLoading: weeklyLoading } = useWeeklyOvertime(
+  const { data: weeklyData, isLoading: weeklyLoading, error: weeklyError, refetch: refetchWeekly } = useWeeklyOvertime(
     selectedLocationId,
     weekStart,
   );
-  const { data: projections, isLoading: projectionsLoading } = useOvertimeProjections(
+  const { data: projections, isLoading: projectionsLoading, error: projectionsError, refetch: refetchProjections } = useOvertimeProjections(
     view === 'projections' ? selectedLocationId : null,
     weekStart,
   );
@@ -134,7 +135,10 @@ export function OvertimePage() {
               <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
             </div>
           )}
-          {!weeklyLoading && weeklyData && (
+          {!weeklyLoading && weeklyError && (
+            <ErrorState message="Failed to load overtime data" onRetry={() => refetchWeekly()} />
+          )}
+          {!weeklyLoading && !weeklyError && weeklyData && (
             <OvertimeTable data={weeklyData} onSelectUser={handleSelectUser} />
           )}
         </>
@@ -147,7 +151,10 @@ export function OvertimePage() {
               <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
             </div>
           )}
-          {!weeklyLoading && weeklyData && (
+          {!weeklyLoading && weeklyError && (
+            <ErrorState message="Failed to load chart data" onRetry={() => refetchWeekly()} />
+          )}
+          {!weeklyLoading && !weeklyError && weeklyData && (
             <div className="bg-surface rounded-xl border border-border p-4">
               <h2 className="text-sm font-semibold text-text mb-3">Staff Hours Distribution</h2>
               <StaffHoursChart data={weeklyData} onSelectUser={handleSelectUser} />
@@ -157,7 +164,9 @@ export function OvertimePage() {
       )}
 
       {view === 'projections' && (
-        <ProjectionsView data={projections ?? []} isLoading={projectionsLoading} />
+        projectionsError
+          ? <ErrorState message="Failed to load projections" onRetry={() => refetchProjections()} />
+          : <ProjectionsView data={projections ?? []} isLoading={projectionsLoading} />
       )}
 
       {/* Staff Detail Modal */}

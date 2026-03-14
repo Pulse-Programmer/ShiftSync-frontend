@@ -3,10 +3,11 @@ import { Search, Users, MapPin, Shield } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useUsers } from '../hooks/api/useUsers';
 import { UserDetailModal } from '../components/admin/UserDetailModal';
+import { ErrorState } from '../components/ui/ErrorState';
 
 export function StaffPage() {
   const { user } = useAuth();
-  const { data: users, isLoading } = useUsers();
+  const { data: users, isLoading, error, refetch } = useUsers();
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState<string>('');
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
@@ -72,8 +73,13 @@ export function StaffPage() {
         </div>
       )}
 
+      {/* Error */}
+      {!isLoading && error && (
+        <ErrorState message="Failed to load staff directory" onRetry={() => refetch()} />
+      )}
+
       {/* Table */}
-      {!isLoading && (
+      {!isLoading && !error && (
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
             <thead>

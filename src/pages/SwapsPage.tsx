@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowLeftRight, Inbox, ArrowDownCircle } from 'lucide-react';
+import { ErrorState } from '../components/ui/ErrorState';
 import { useAuth } from '../hooks/useAuth';
 import {
   useSwapRequests,
@@ -20,10 +21,10 @@ export function SwapsPage() {
   const [tab, setTab] = useState<Tab>('requests');
   const [statusFilter, setStatusFilter] = useState<string>('');
 
-  const { data: swaps, isLoading: swapsLoading } = useSwapRequests(
+  const { data: swaps, isLoading: swapsLoading, error: swapsError, refetch: refetchSwaps } = useSwapRequests(
     statusFilter ? { status: statusFilter } : undefined,
   );
-  const { data: available, isLoading: availableLoading } = useAvailableShifts();
+  const { data: available, isLoading: availableLoading, error: availableError, refetch: refetchAvailable } = useAvailableShifts();
 
   const acceptSwap = useAcceptSwap();
   const approveSwap = useApproveSwap();
@@ -106,7 +107,11 @@ export function SwapsPage() {
             </div>
           )}
 
-          {!swapsLoading && swaps && swaps.length === 0 && (
+          {!swapsLoading && swapsError && (
+            <ErrorState message="Failed to load swap requests" onRetry={() => refetchSwaps()} />
+          )}
+
+          {!swapsLoading && !swapsError && swaps && swaps.length === 0 && (
             <div className="text-center py-12">
               <Inbox size={32} className="text-text-secondary/30 mx-auto mb-3" />
               <p className="text-sm text-text-secondary">No swap requests found</p>
@@ -147,7 +152,11 @@ export function SwapsPage() {
             </div>
           )}
 
-          {!availableLoading && available && available.length === 0 && (
+          {!availableLoading && availableError && (
+            <ErrorState message="Failed to load available shifts" onRetry={() => refetchAvailable()} />
+          )}
+
+          {!availableLoading && !availableError && available && available.length === 0 && (
             <div className="text-center py-12">
               <Inbox size={32} className="text-text-secondary/30 mx-auto mb-3" />
               <p className="text-sm text-text-secondary">No shifts available for pickup</p>

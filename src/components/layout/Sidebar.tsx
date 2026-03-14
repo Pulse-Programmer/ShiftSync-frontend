@@ -39,8 +39,8 @@ export function Sidebar() {
   const filtered = navItems.filter((item) => item.roles.includes(user.role));
 
   return (
-    <aside className="hidden md:flex md:w-56 lg:w-60 flex-col bg-surface-alt border-r border-border shrink-0">
-      <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
+    <aside className="hidden md:flex md:w-56 lg:w-60 flex-col bg-surface-alt border-r border-border shrink-0" aria-label="Main navigation">
+      <nav className="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto" role="navigation">
         {filtered.map((item) => (
           <NavLink
             key={item.to}
@@ -92,7 +92,8 @@ export function MobileNav() {
 
   return (
     <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 bg-surface border-t border-border
-                    flex items-center justify-around py-1 safe-bottom">
+                    flex items-center justify-around py-1 safe-bottom"
+         role="navigation" aria-label="Mobile navigation">
       {mobileItems.map((item) => (
         <NavLink
           key={item.to}

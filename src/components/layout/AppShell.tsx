@@ -3,9 +3,11 @@ import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 import { Sidebar, MobileNav } from './Sidebar';
 import { useRealtimeSync } from '../../hooks/useRealtimeSync';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
 export function AppShell() {
   useRealtimeSync();
+  useDocumentTitle();
   const [selectedLocationId, setSelectedLocationId] = useState<string | null>(() => {
     try {
       return localStorage.getItem('shiftsync-location');
