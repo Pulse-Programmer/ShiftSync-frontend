@@ -25,7 +25,7 @@ export function RequireRole({ roles, children }: { roles: UserRole[]; children: 
   const { user } = useAuth();
 
   if (!user || !roles.includes(user.role)) {
-    return <Navigate to="/schedule" replace />;
+    return <Navigate to={user?.role === 'admin' ? '/' : '/schedule'} replace />;
   }
 
   return <>{children}</>;

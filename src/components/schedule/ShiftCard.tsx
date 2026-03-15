@@ -61,7 +61,7 @@ export function ShiftCard({
         </div>
 
         {isManager && (
-          <div className="relative">
+          <div className={`relative ${showMenu ? 'z-50' : ''}`}>
             <button
               onClick={() => setShowMenu(!showMenu)}
               className="p-1 rounded hover:bg-bg/50 text-text-secondary"

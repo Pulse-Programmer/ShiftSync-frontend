@@ -1,0 +1,677 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - img [ref=e9]
+          - heading "ShiftSync" [level=1] [ref=e12]
+        - generic [ref=e13]:
+          - combobox [ref=e14] [cursor=pointer]:
+            - option "Coastal Eats Downtown" [selected]
+          - img
+      - generic [ref=e15]:
+        - button "Switch theme" [ref=e17] [cursor=pointer]:
+          - img [ref=e18]
+          - generic [ref=e24]: Organic Dark
+          - img [ref=e25]
+        - button "Notifications" [ref=e28] [cursor=pointer]:
+          - img [ref=e29]
+        - button "JP" [ref=e33] [cursor=pointer]:
+          - generic [ref=e35]: JP
+          - img [ref=e36]
+  - generic [ref=e38]:
+    - complementary "Main navigation" [ref=e39]:
+      - navigation [ref=e40]:
+        - link "Schedule" [ref=e41] [cursor=pointer]:
+          - /url: /schedule
+          - img [ref=e42]
+          - generic [ref=e44]: Schedule
+        - link "Staff" [ref=e45] [cursor=pointer]:
+          - /url: /staff
+          - img [ref=e46]
+          - generic [ref=e51]: Staff
+        - link "Swaps" [ref=e52] [cursor=pointer]:
+          - /url: /swaps
+          - img [ref=e53]
+          - generic [ref=e56]: Swaps
+        - link "Overtime" [ref=e57] [cursor=pointer]:
+          - /url: /overtime
+          - img [ref=e58]
+          - generic [ref=e61]: Overtime
+        - link "Analytics" [ref=e62] [cursor=pointer]:
+          - /url: /analytics
+          - img [ref=e63]
+          - generic [ref=e65]: Analytics
+        - link "On Duty" [ref=e66] [cursor=pointer]:
+          - /url: /on-duty
+          - img [ref=e67]
+          - generic [ref=e70]: On Duty
+        - link "Invitations" [ref=e71] [cursor=pointer]:
+          - /url: /invitations
+          - img [ref=e72]
+          - generic [ref=e75]: Invitations
+        - link "Settings" [ref=e76] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e77]
+          - generic [ref=e80]: Settings
+      - generic [ref=e82]:
+        - paragraph [ref=e83]: Jordan Park
+        - paragraph [ref=e84]: manager
+    - main [ref=e85]:
+      - generic [ref=e86]:
+        - generic [ref=e87]:
+          - generic [ref=e89]:
+            - button [ref=e90] [cursor=pointer]:
+              - img [ref=e91]
+            - generic [ref=e93]:
+              - heading "Mar 9 – Mar 15, 2026" [level=1] [ref=e94]
+              - generic [ref=e95]:
+                - generic [ref=e96]: This week
+                - generic [ref=e97]: Published
+            - button [ref=e98] [cursor=pointer]:
+              - img [ref=e99]
+          - generic [ref=e101]:
+            - button "Unpublish" [ref=e102] [cursor=pointer]:
+              - img [ref=e103]
+              - text: Unpublish
+            - button "Add Shift" [ref=e106] [cursor=pointer]:
+              - img [ref=e107]
+              - text: Add Shift
+        - generic [ref=e108]:
+          - generic [ref=e110]:
+            - generic [ref=e111]:
+              - generic [ref=e112]:
+                - generic [ref=e113]:
+                  - paragraph [ref=e114]: Mon
+                  - paragraph [ref=e115]: "9"
+                - button "Add shift" [ref=e116] [cursor=pointer]:
+                  - img [ref=e117]
+              - generic [ref=e118]:
+                - generic [ref=e119]:
+                  - generic [ref=e120]:
+                    - generic [ref=e121]:
+                      - paragraph [ref=e122]: 7:00 PM – 3:00 AM
+                      - paragraph [ref=e123]: 8.0hbartender
+                    - button [ref=e125] [cursor=pointer]:
+                      - img [ref=e126]
+                  - generic [ref=e130]:
+                    - img [ref=e131]
+                    - generic [ref=e136]: 1/1
+                  - generic [ref=e138]:
+                    - generic [ref=e139]: Mike C.
+                    - button "Unassign" [ref=e140] [cursor=pointer]:
+                      - img [ref=e141]
+                - generic [ref=e144]:
+                  - generic [ref=e145]:
+                    - generic [ref=e146]:
+                      - paragraph [ref=e147]: 7:00 PM – 3:00 AM
+                      - paragraph [ref=e148]: 8.0hline cook
+                    - button [ref=e150] [cursor=pointer]:
+                      - img [ref=e151]
+                  - generic [ref=e155]:
+                    - img [ref=e156]
+                    - generic [ref=e161]: 1/1
+                  - generic [ref=e163]:
+                    - generic [ref=e164]: James W.
+                    - button "Unassign" [ref=e165] [cursor=pointer]:
+                      - img [ref=e166]
+            - generic [ref=e169]:
+              - generic [ref=e170]:
+                - generic [ref=e171]:
+                  - paragraph [ref=e172]: Tue
+                  - paragraph [ref=e173]: "10"
+                - button "Add shift" [ref=e174] [cursor=pointer]:
+                  - img [ref=e175]
+              - generic [ref=e177]:
+                - generic [ref=e178]:
+                  - generic [ref=e179]:
+                    - paragraph [ref=e180]: 7:00 PM – 3:00 AM
+                    - paragraph [ref=e181]: 8.0hline cook
+                  - button [ref=e183] [cursor=pointer]:
+                    - img [ref=e184]
+                - generic [ref=e188]:
+                  - img [ref=e189]
+                  - generic [ref=e194]: 1/1
+                - generic [ref=e196]:
+                  - generic [ref=e197]: James W.
+                  - button "Unassign" [ref=e198] [cursor=pointer]:
+                    - img [ref=e199]
+            - generic [ref=e202]:
+              - generic [ref=e203]:
+                - generic [ref=e204]:
+                  - paragraph [ref=e205]: Wed
+                  - paragraph [ref=e206]: "11"
+                - button "Add shift" [ref=e207] [cursor=pointer]:
+                  - img [ref=e208]
+              - generic [ref=e210]:
+                - generic [ref=e211]:
+                  - generic [ref=e212]:
+                    - paragraph [ref=e213]: 7:00 PM – 3:00 AM
+                    - paragraph [ref=e214]: 8.0hline cook
+                  - button [ref=e216] [cursor=pointer]:
+                    - img [ref=e217]
+                - generic [ref=e221]:
+                  - img [ref=e222]
+                  - generic [ref=e227]: 1/1
+                - generic [ref=e229]:
+                  - generic [ref=e230]: James W.
+                  - button "Unassign" [ref=e231] [cursor=pointer]:
+                    - img [ref=e232]
+            - generic [ref=e235]:
+              - generic [ref=e236]:
+                - generic [ref=e237]:
+                  - paragraph [ref=e238]: Thu
+                  - paragraph [ref=e239]: "12"
+                - button "Add shift" [ref=e240] [cursor=pointer]:
+                  - img [ref=e241]
+              - generic [ref=e243]:
+                - generic [ref=e244]:
+                  - generic [ref=e245]:
+                    - paragraph [ref=e246]: 9:00 AM – 5:00 PM
+                    - paragraph [ref=e247]: 8.0h
+                  - button [ref=e249] [cursor=pointer]:
+                    - img [ref=e250]
+                - generic [ref=e254]:
+                  - img [ref=e255]
+                  - generic [ref=e260]: 0/2
+            - generic [ref=e261]:
+              - generic [ref=e262]:
+                - generic [ref=e263]:
+                  - paragraph [ref=e264]: Fri
+                  - paragraph [ref=e265]: "13"
+                - button "Add shift" [ref=e266] [cursor=pointer]:
+                  - img [ref=e267]
+              - generic [ref=e269]:
+                - generic [ref=e270]:
+                  - generic [ref=e271]:
+                    - paragraph [ref=e272]: 3:00 AM – 9:00 AM
+                    - paragraph [ref=e273]: 6.0hbartender
+                  - button [ref=e275] [cursor=pointer]:
+                    - img [ref=e276]
+                - generic [ref=e280]:
+                  - img [ref=e281]
+                  - generic [ref=e286]: 2/2
+                - generic [ref=e287]:
+                  - generic [ref=e288]:
+                    - generic [ref=e289]: Mike C.
+                    - button "Unassign" [ref=e290] [cursor=pointer]:
+                      - img [ref=e291]
+                  - generic [ref=e294]:
+                    - generic [ref=e295]: Sarah J.
+                    - button "Unassign" [ref=e296] [cursor=pointer]:
+                      - img [ref=e297]
+            - generic [ref=e300]:
+              - generic [ref=e301]:
+                - generic [ref=e302]:
+                  - paragraph [ref=e303]: Sat
+                  - paragraph [ref=e304]: "14"
+                - button "Add shift" [ref=e305] [cursor=pointer]:
+                  - img [ref=e306]
+              - generic [ref=e308]:
+                - generic [ref=e309]:
+                  - generic [ref=e310]:
+                    - paragraph [ref=e311]: 3:00 AM – 9:00 AM
+                    - paragraph [ref=e312]: 6.0hserver
+                  - button [ref=e314] [cursor=pointer]:
+                    - img [ref=e315]
+                - generic [ref=e319]:
+                  - img [ref=e320]
+                  - generic [ref=e325]: 1/2
+                - generic [ref=e327]:
+                  - generic [ref=e328]: Sarah J.
+                  - button "Unassign" [ref=e329] [cursor=pointer]:
+                    - img [ref=e330]
+            - generic [ref=e333]:
+              - generic [ref=e334]:
+                - generic [ref=e335]:
+                  - paragraph [ref=e336]: Sun
+                  - paragraph [ref=e337]: "15"
+                - button "Add shift" [ref=e338] [cursor=pointer]:
+                  - img [ref=e339]
+              - generic [ref=e340]:
+                - generic [ref=e341]:
+                  - generic [ref=e342]:
+                    - generic [ref=e343]:
+                      - paragraph [ref=e344]: 5:00 AM – 8:00 AM
+                      - paragraph [ref=e345]: 3.0h
+                    - button [ref=e347] [cursor=pointer]:
+                      - img [ref=e348]
+                  - generic [ref=e352]:
+                    - img [ref=e353]
+                    - generic [ref=e358]: 0/3
+                  - paragraph [ref=e359]: PW-test-1773550435076
+                - generic [ref=e360]:
+                  - generic [ref=e361]:
+                    - generic [ref=e362]:
+                      - paragraph [ref=e363]: 5:00 AM – 8:00 AM
+                      - paragraph [ref=e364]: 3.0h
+                    - button [ref=e366] [cursor=pointer]:
+                      - img [ref=e367]
+                  - generic [ref=e371]:
+                    - img [ref=e372]
+                    - generic [ref=e377]: 0/3
+                  - paragraph [ref=e378]: PW-test-1773550438269
+                - generic [ref=e379]:
+                  - generic [ref=e380]:
+                    - generic [ref=e381]:
+                      - paragraph [ref=e382]: 5:00 AM – 8:00 AM
+                      - paragraph [ref=e383]: 3.0h
+                    - button [ref=e385] [cursor=pointer]:
+                      - img [ref=e386]
+                  - generic [ref=e390]:
+                    - img [ref=e391]
+                    - generic [ref=e396]: 0/3
+                  - paragraph [ref=e397]: PW-test-1773550443671
+                - generic [ref=e398]:
+                  - generic [ref=e399]:
+                    - generic [ref=e400]:
+                      - paragraph [ref=e401]: 5:00 AM – 8:00 AM
+                      - paragraph [ref=e402]: 3.0h
+                    - button [ref=e404] [cursor=pointer]:
+                      - img [ref=e405]
+                  - generic [ref=e409]:
+                    - img [ref=e410]
+                    - generic [ref=e415]: 0/3
+                  - paragraph [ref=e416]: PW-test-1773550441118
+                - generic [ref=e417]:
+                  - generic [ref=e418]:
+                    - generic [ref=e419]:
+                      - paragraph [ref=e420]: 5:00 AM – 8:00 AM
+                      - paragraph [ref=e421]: 3.0h
+                    - button [ref=e423] [cursor=pointer]:
+                      - img [ref=e424]
+                  - generic [ref=e428]:
+                    - img [ref=e429]
+                    - generic [ref=e434]: 0/3
+                  - paragraph [ref=e435]: PW-test-1773550447772
+                - generic [ref=e436]:
+                  - generic [ref=e437]:
+                    - generic [ref=e438]:
+                      - paragraph [ref=e439]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e440]: 6.0h
+                    - button [ref=e442] [cursor=pointer]:
+                      - img [ref=e443]
+                  - generic [ref=e447]:
+                    - img [ref=e448]
+                    - generic [ref=e453]: 0/3
+                  - paragraph [ref=e454]: PW-test-1773550185005
+                - generic [ref=e455]:
+                  - generic [ref=e456]:
+                    - generic [ref=e457]:
+                      - paragraph [ref=e458]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e459]: 6.0h
+                    - button [ref=e461] [cursor=pointer]:
+                      - img [ref=e462]
+                  - generic [ref=e466]:
+                    - img [ref=e467]
+                    - generic [ref=e472]: 0/3
+                  - paragraph [ref=e473]: PW-test-1773550024923
+                - generic [ref=e474]:
+                  - generic [ref=e475]:
+                    - generic [ref=e476]:
+                      - paragraph [ref=e477]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e478]: 6.0h
+                    - button [ref=e480] [cursor=pointer]:
+                      - img [ref=e481]
+                  - generic [ref=e485]:
+                    - img [ref=e486]
+                    - generic [ref=e491]: 0/3
+                  - paragraph [ref=e492]: PW-test-1773550172282
+                - generic [ref=e493]:
+                  - generic [ref=e494]:
+                    - generic [ref=e495]:
+                      - paragraph [ref=e496]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e497]: 6.0h
+                    - button [ref=e499] [cursor=pointer]:
+                      - img [ref=e500]
+                  - generic [ref=e504]:
+                    - img [ref=e505]
+                    - generic [ref=e510]: 0/3
+                  - paragraph [ref=e511]: PW-test-1773550277231
+                - generic [ref=e512]:
+                  - generic [ref=e513]:
+                    - generic [ref=e514]:
+                      - paragraph [ref=e515]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e516]: 6.0h
+                    - button [ref=e518] [cursor=pointer]:
+                      - img [ref=e519]
+                  - generic [ref=e523]:
+                    - img [ref=e524]
+                    - generic [ref=e529]: 0/3
+                  - paragraph [ref=e530]: PW-test-1773550282401
+                - generic [ref=e531]:
+                  - generic [ref=e532]:
+                    - generic [ref=e533]:
+                      - paragraph [ref=e534]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e535]: 6.0h
+                    - button [ref=e537] [cursor=pointer]:
+                      - img [ref=e538]
+                  - generic [ref=e542]:
+                    - img [ref=e543]
+                    - generic [ref=e548]: 0/3
+                  - paragraph [ref=e549]: PW-test-1773550268804
+                - generic [ref=e550]:
+                  - generic [ref=e551]:
+                    - generic [ref=e552]:
+                      - paragraph [ref=e553]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e554]: 6.0h
+                    - button [ref=e556] [cursor=pointer]:
+                      - img [ref=e557]
+                  - generic [ref=e561]:
+                    - img [ref=e562]
+                    - generic [ref=e567]: 0/3
+                  - paragraph [ref=e568]: PW-test-1773550285682
+                - generic [ref=e569]:
+                  - generic [ref=e570]:
+                    - generic [ref=e571]:
+                      - paragraph [ref=e572]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e573]: 6.0h
+                    - button [ref=e575] [cursor=pointer]:
+                      - img [ref=e576]
+                  - generic [ref=e580]:
+                    - img [ref=e581]
+                    - generic [ref=e586]: 0/3
+                  - paragraph [ref=e587]: PW-test-1773550017498
+                - generic [ref=e588]:
+                  - generic [ref=e589]:
+                    - generic [ref=e590]:
+                      - paragraph [ref=e591]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e592]: 6.0h
+                    - button [ref=e594] [cursor=pointer]:
+                      - img [ref=e595]
+                  - generic [ref=e599]:
+                    - img [ref=e600]
+                    - generic [ref=e605]: 0/3
+                  - paragraph [ref=e606]: PW-test-1773550263915
+                - generic [ref=e607]:
+                  - generic [ref=e608]:
+                    - generic [ref=e609]:
+                      - paragraph [ref=e610]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e611]: 6.0h
+                    - button [ref=e613] [cursor=pointer]:
+                      - img [ref=e614]
+                  - generic [ref=e618]:
+                    - img [ref=e619]
+                    - generic [ref=e624]: 0/3
+                  - paragraph [ref=e625]: PW-test-1773550289348
+                - generic [ref=e626]:
+                  - generic [ref=e627]:
+                    - generic [ref=e628]:
+                      - paragraph [ref=e629]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e630]: 6.0h
+                    - button [ref=e632] [cursor=pointer]:
+                      - img [ref=e633]
+                  - generic [ref=e637]:
+                    - img [ref=e638]
+                    - generic [ref=e643]: 0/3
+                  - paragraph [ref=e644]: PW-test-1773550190952
+                - generic [ref=e645]:
+                  - generic [ref=e646]:
+                    - generic [ref=e647]:
+                      - paragraph [ref=e648]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e649]: 6.0h
+                    - button [ref=e651] [cursor=pointer]:
+                      - img [ref=e652]
+                  - generic [ref=e656]:
+                    - img [ref=e657]
+                    - generic [ref=e662]: 0/3
+                  - paragraph [ref=e663]: PW-test-1773550265869
+                - generic [ref=e664]:
+                  - generic [ref=e665]:
+                    - generic [ref=e666]:
+                      - paragraph [ref=e667]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e668]: 6.0h
+                    - button [ref=e670] [cursor=pointer]:
+                      - img [ref=e671]
+                  - generic [ref=e675]:
+                    - img [ref=e676]
+                    - generic [ref=e681]: 1/3
+                  - generic [ref=e683]:
+                    - generic [ref=e684]: James W.
+                    - button "Unassign" [ref=e685] [cursor=pointer]:
+                      - img [ref=e686]
+                  - paragraph [ref=e689]: PW-test-1773550177516
+                - generic [ref=e690]:
+                  - generic [ref=e691]:
+                    - generic [ref=e692]:
+                      - paragraph [ref=e693]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e694]: 6.0h
+                    - button [ref=e696] [cursor=pointer]:
+                      - img [ref=e697]
+                  - generic [ref=e701]:
+                    - img [ref=e702]
+                    - generic [ref=e707]: 0/3
+                  - paragraph [ref=e708]: PW-test-1773550272028
+                - generic [ref=e709]:
+                  - generic [ref=e710]:
+                    - generic [ref=e711]:
+                      - paragraph [ref=e712]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e713]: 6.0h
+                    - button [ref=e715] [cursor=pointer]:
+                      - img [ref=e716]
+                  - generic [ref=e720]:
+                    - img [ref=e721]
+                    - generic [ref=e726]: 0/3
+                  - paragraph [ref=e727]: PW-test-1773550169967
+                - generic [ref=e728]:
+                  - generic [ref=e729]:
+                    - generic [ref=e730]:
+                      - paragraph [ref=e731]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e732]: 6.0h
+                    - button [ref=e734] [cursor=pointer]:
+                      - img [ref=e735]
+                  - generic [ref=e739]:
+                    - img [ref=e740]
+                    - generic [ref=e745]: 0/3
+                  - paragraph [ref=e746]: PW-test-1773550180403
+                - generic [ref=e747]:
+                  - generic [ref=e748]:
+                    - generic [ref=e749]:
+                      - paragraph [ref=e750]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e751]: 6.0h
+                    - button [ref=e753] [cursor=pointer]:
+                      - img [ref=e754]
+                  - generic [ref=e758]:
+                    - img [ref=e759]
+                    - generic [ref=e764]: 0/3
+                  - paragraph [ref=e765]: PW-test-1773550046867
+                - generic [ref=e766]:
+                  - generic [ref=e767]:
+                    - generic [ref=e768]:
+                      - paragraph [ref=e769]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e770]: 6.0h
+                    - button [ref=e772] [cursor=pointer]:
+                      - img [ref=e773]
+                  - generic [ref=e777]:
+                    - img [ref=e778]
+                    - generic [ref=e783]: 0/3
+                  - paragraph [ref=e784]: PW-test-1773550019739
+                - generic [ref=e785]:
+                  - generic [ref=e786]:
+                    - generic [ref=e787]:
+                      - paragraph [ref=e788]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e789]: 6.0h
+                    - button [ref=e791] [cursor=pointer]:
+                      - img [ref=e792]
+                  - generic [ref=e796]:
+                    - img [ref=e797]
+                    - generic [ref=e802]: 0/3
+                  - paragraph [ref=e803]: PW-test-1773550187366
+                - generic [ref=e804]:
+                  - generic [ref=e805]:
+                    - generic [ref=e806]:
+                      - paragraph [ref=e807]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e808]: 6.0h
+                    - button [ref=e810] [cursor=pointer]:
+                      - img [ref=e811]
+                  - generic [ref=e815]:
+                    - img [ref=e816]
+                    - generic [ref=e821]: 0/3
+                  - paragraph [ref=e822]: PW-test-1773550022586
+                - generic [ref=e823]:
+                  - generic [ref=e824]:
+                    - generic [ref=e825]:
+                      - paragraph [ref=e826]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e827]: 6.0h
+                    - button [ref=e829] [cursor=pointer]:
+                      - img [ref=e830]
+                  - generic [ref=e834]:
+                    - img [ref=e835]
+                    - generic [ref=e840]: 0/3
+                  - paragraph [ref=e841]: PW-test-1773550033390
+                - generic [ref=e842]:
+                  - generic [ref=e843]:
+                    - generic [ref=e844]:
+                      - paragraph [ref=e845]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e846]: 6.0h
+                    - button [ref=e848] [cursor=pointer]:
+                      - img [ref=e849]
+                  - generic [ref=e853]:
+                    - img [ref=e854]
+                    - generic [ref=e859]: 0/3
+                  - paragraph [ref=e860]: PW-test-1773550044586
+                - generic [ref=e861]:
+                  - generic [ref=e862]:
+                    - generic [ref=e863]:
+                      - paragraph [ref=e864]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e865]: 6.0h
+                    - button [ref=e867] [cursor=pointer]:
+                      - img [ref=e868]
+                  - generic [ref=e872]:
+                    - img [ref=e873]
+                    - generic [ref=e878]: 0/3
+                  - paragraph [ref=e879]: PW-test-1773550042187
+                - generic [ref=e880]:
+                  - generic [ref=e881]:
+                    - generic [ref=e882]:
+                      - paragraph [ref=e883]: 6:00 AM – 12:00 PM
+                      - paragraph [ref=e884]: 6.0h
+                    - button [ref=e886] [cursor=pointer]:
+                      - img [ref=e887]
+                  - generic [ref=e891]:
+                    - img [ref=e892]
+                    - generic [ref=e897]: 0/3
+                  - paragraph [ref=e898]: PW-test-1773550174743
+                - generic [ref=e899]:
+                  - generic [ref=e900]:
+                    - generic [ref=e901]:
+                      - paragraph [ref=e902]: 9:00 AM – 1:00 PM
+                      - paragraph [ref=e903]: 4.0hbartender
+                    - button [ref=e905] [cursor=pointer]:
+                      - img [ref=e906]
+                  - generic [ref=e910]:
+                    - img [ref=e911]
+                    - generic [ref=e916]: 0/1
+                - generic [ref=e917]:
+                  - generic [ref=e918]:
+                    - generic [ref=e919]:
+                      - paragraph [ref=e920]: 10:00 AM – 4:00 PM
+                      - paragraph [ref=e921]: 6.0h
+                    - button [ref=e923] [cursor=pointer]:
+                      - img [ref=e924]
+                  - generic [ref=e928]:
+                    - img [ref=e929]
+                    - generic [ref=e934]: 0/2
+                  - paragraph [ref=e935]: Playwright test shift
+          - generic [ref=e938]:
+            - heading "Schedule Intelligence" [level=3] [ref=e939]
+            - generic [ref=e940]:
+              - generic [ref=e941]:
+                - img [ref=e942]
+                - paragraph [ref=e945]: Weekly Labor Hours
+              - paragraph [ref=e946]: 80h
+              - paragraph [ref=e949]: 11/104 slots filled
+            - generic [ref=e950]:
+              - generic [ref=e951]:
+                - img [ref=e952]
+                - paragraph [ref=e954]: 34 Issues Found
+              - list [ref=e955]:
+                - listitem [ref=e956]:
+                  - img [ref=e958]
+                  - generic [ref=e960]:
+                    - generic [ref=e961]: "line cook:"
+                    - text: Understaffed by 1 (1/2)
+                - listitem [ref=e962]:
+                  - img [ref=e964]
+                  - generic [ref=e966]:
+                    - generic [ref=e967]: "Shift:"
+                    - text: Understaffed by 2 (0/2)
+                - listitem [ref=e968]:
+                  - img [ref=e970]
+                  - generic [ref=e972]:
+                    - generic [ref=e973]: "server:"
+                    - text: Understaffed by 1 (1/2)
+                - listitem [ref=e974]:
+                  - img [ref=e976]
+                  - generic [ref=e978]:
+                    - generic [ref=e979]: "Shift:"
+                    - text: Understaffed by 3 (0/3)
+                - listitem [ref=e980]:
+                  - img [ref=e982]
+                  - generic [ref=e984]:
+                    - generic [ref=e985]: "Shift:"
+                    - text: Understaffed by 3 (0/3)
+                - listitem [ref=e986]: +29 more issues
+            - generic [ref=e987]:
+              - generic [ref=e988]:
+                - img [ref=e989]
+                - paragraph [ref=e991]: Suggestions
+              - paragraph [ref=e993]: Coverage is at 11%. Consider assigning more staff before publishing.
+        - dialog "Assign Staff" [ref=e994]:
+          - generic [ref=e996]:
+            - generic [ref=e997]:
+              - heading "Assign Staff" [level=2] [ref=e998]
+              - button "Close dialog" [ref=e999] [cursor=pointer]:
+                - img [ref=e1000]
+            - generic [ref=e1004]:
+              - paragraph [ref=e1006]: Sun, Mar 15 · 5:00 AM – 8:00 AM
+              - generic [ref=e1007]:
+                - img [ref=e1008]
+                - textbox "Search staff..." [ref=e1011]
+              - generic [ref=e1012]:
+                - button "Mike Chenbartender, server" [ref=e1013] [cursor=pointer]:
+                  - generic [ref=e1014]:
+                    - generic [ref=e1015]: Mike Chen
+                    - text: bartender, server
+                - button "Emily Davishost" [ref=e1016] [cursor=pointer]:
+                  - generic [ref=e1017]:
+                    - generic [ref=e1018]: Emily Davis
+                    - text: host
+                - button "Maria Garciaserver, host" [ref=e1019] [cursor=pointer]:
+                  - generic [ref=e1020]:
+                    - generic [ref=e1021]: Maria Garcia
+                    - text: server, host
+                - button "Sarah Johnsonbartender, server" [ref=e1022] [cursor=pointer]:
+                  - generic [ref=e1023]:
+                    - generic [ref=e1024]: Sarah Johnson
+                    - text: bartender, server
+                - button "James Wilsonline cook" [active] [ref=e1025] [cursor=pointer]:
+                  - generic [ref=e1026]:
+                    - generic [ref=e1027]: James Wilson
+                    - text: line cook
+              - generic [ref=e1028]:
+                - paragraph [ref=e1029]: Constraint check for James Wilson
+                - generic [ref=e1030]:
+                  - img [ref=e1031]
+                  - paragraph [ref=e1035]:
+                    - text: "Weekly hours: 32.0h →"
+                    - generic [ref=e1036]: 35.0h
+                - generic [ref=e1040]:
+                  - img [ref=e1041]
+                  - paragraph [ref=e1046]: Already assigned to a shift at Coastal Eats Downtown from 1:00:00 PM to 7:00:00 PM which overlaps with this shift
+                - generic [ref=e1048]:
+                  - img [ref=e1049]
+                  - paragraph [ref=e1054]: Shift time (05:00:00-08:00:00) on Mar 15, 2026 falls outside available hours (06:00:00-23:00:00)
+                - generic [ref=e1056]:
+                  - img [ref=e1057]
+                  - paragraph [ref=e1060]: Would bring total to 9.0 hours on 2026-03-15 (exceeds 8-hour guideline)
+                - generic [ref=e1062]:
+                  - img [ref=e1063]
+                  - paragraph [ref=e1066]: Would bring weekly total to 35.0 hours (approaching 40-hour overtime threshold)
+              - generic [ref=e1067]:
+                - button "Cancel" [ref=e1068] [cursor=pointer]
+                - button "Assign" [disabled] [ref=e1069]
+```

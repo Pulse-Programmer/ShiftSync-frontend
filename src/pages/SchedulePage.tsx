@@ -10,6 +10,7 @@ import { AssignStaffModal } from '../components/schedule/AssignStaffModal';
 import { PersonalSchedule } from '../components/schedule/PersonalSchedule';
 import { getWeekStart, prevWeek, nextWeek } from '../utils/date';
 import { ErrorState } from '../components/ui/ErrorState';
+import { ScheduleIntelligence } from '../components/schedule/ScheduleIntelligence';
 import { DateTime } from 'luxon';
 
 interface OutletCtx {
@@ -25,7 +26,7 @@ export function SchedulePage() {
   // Staff sees personal schedule
   if (user?.role === 'staff') {
     return (
-      <div className="p-4 sm:p-6 max-w-lg mx-auto">
+      <div className="p-4 sm:p-6 lg:p-8 max-w-2xl mx-auto">
         <PersonalSchedule weekStart={weekStart} onWeekChange={setWeekStart} />
       </div>
     );
@@ -223,17 +224,33 @@ function ManagerScheduleView({
       )}
 
       {schedule && shifts && !shiftsLoading && (
-        <WeekView
-          weekStart={weekStart}
-          shifts={shifts}
-          timezone={timezone}
-          isManager={true}
-          onAddShift={(date) => setShiftModal({ open: true, date })}
-          onAssignShift={(shift) => setAssignModal({ open: true, shift })}
-          onEditShift={(shift) => setShiftModal({ open: true, editShift: shift })}
-          onDeleteShift={handleDeleteShift}
-          onUnassign={handleUnassign}
-        />
+        <div className="flex gap-6">
+          <div className="flex-1 min-w-0">
+            <WeekView
+              weekStart={weekStart}
+              shifts={shifts}
+              timezone={timezone}
+              isManager={true}
+              onAddShift={(date) => setShiftModal({ open: true, date })}
+              onAssignShift={(shift) => setAssignModal({ open: true, shift })}
+              onEditShift={(shift) => setShiftModal({ open: true, editShift: shift })}
+              onDeleteShift={handleDeleteShift}
+              onUnassign={handleUnassign}
+            />
+          </div>
+          {locationId && (
+            <div className="hidden xl:block w-72 shrink-0">
+              <div className="sticky top-20">
+                <ScheduleIntelligence
+                  locationId={locationId}
+                  weekStart={weekStart}
+                  shifts={shifts}
+                  scheduleStatus={schedule.status}
+                />
+              </div>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Create/Edit Shift Modal */}

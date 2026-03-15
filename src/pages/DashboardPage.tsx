@@ -1,12 +1,16 @@
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { AdminDashboardPage } from './AdminDashboardPage';
 
-/** Dashboard redirects to the primary view per role */
+/** Dashboard routes admin to global oversight, others to schedule */
 export function DashboardPage() {
   const { user } = useAuth();
 
   if (!user) return <Navigate to="/login" replace />;
 
-  // Everyone lands on the schedule view — it adapts per role
+  if (user.role === 'admin') {
+    return <AdminDashboardPage />;
+  }
+
   return <Navigate to="/schedule" replace />;
 }

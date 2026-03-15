@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { LogOut, Clock, ChevronDown } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+import { LogOut, Clock, ChevronDown, LayoutDashboard, BarChart3, FileText, Shield } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 import { NotificationBell } from '../notifications/NotificationBell';
@@ -26,28 +27,67 @@ export function Header({ selectedLocationId, onLocationChange }: HeaderProps) {
     ? allLocations
     : (locations ?? []);
 
-  // Auto-select first location
+  // Auto-select first location, or reset if stored ID is no longer valid
   useEffect(() => {
-    if (!selectedLocationId && displayLocations.length > 0) {
+    if (displayLocations.length === 0) return;
+    if (!selectedLocationId || !displayLocations.some((l) => l.id === selectedLocationId)) {
       onLocationChange(displayLocations[0].id);
     }
   }, [selectedLocationId, displayLocations, onLocationChange]);
 
   if (!user) return null;
 
+  const isAdmin = user.role === 'admin';
+
   return (
     <header className="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border">
-      <div className="flex items-center justify-between px-4 sm:px-5 h-14">
-        {/* Left: Logo (mobile) + location selector */}
-        <div className="flex items-center gap-3">
-          <div className="md:hidden flex items-center gap-2">
+      <div className="flex items-center justify-between px-4 sm:px-6 h-14">
+        {/* Left: Logo + Nav */}
+        <div className="flex items-center gap-6">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
             <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center">
               <Clock size={14} className="text-text-inverse" />
             </div>
+            <h1 className="text-sm font-extrabold tracking-tight text-text hidden sm:block">
+              ShiftSync
+              {isAdmin && (
+                <span className="font-normal text-text-secondary ml-1">Corporate</span>
+              )}
+            </h1>
           </div>
 
-          {/* Location selector — managers/admins who manage schedules */}
-          {user.role !== 'staff' && displayLocations.length > 0 && (
+          {/* Admin top nav */}
+          {isAdmin && (
+            <nav className="hidden md:flex items-center gap-1">
+              {[
+                { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
+                { to: '/analytics', label: 'Analytics', icon: BarChart3 },
+                { to: '/overtime', label: 'Compliance', icon: Shield },
+                { to: '/audit', label: 'Audit Log', icon: FileText },
+              ].map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.end}
+                  className={({ isActive }) =>
+                    `flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold
+                     uppercase tracking-wider transition-colors
+                     ${isActive
+                       ? 'text-primary bg-primary/10'
+                       : 'text-text-secondary hover:text-text hover:bg-surface-hover'
+                     }`
+                  }
+                >
+                  <item.icon size={14} />
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          )}
+
+          {/* Manager/Staff: location selector */}
+          {!isAdmin && user.role !== 'staff' && displayLocations.length > 0 && (
             <div className="relative">
               <select
                 value={selectedLocationId ?? ''}
@@ -66,7 +106,7 @@ export function Header({ selectedLocationId, onLocationChange }: HeaderProps) {
             </div>
           )}
 
-          {/* Staff sees their name */}
+          {/* Staff label */}
           {user.role === 'staff' && (
             <span className="text-sm font-semibold text-text">
               My Schedule
@@ -74,8 +114,28 @@ export function Header({ selectedLocationId, onLocationChange }: HeaderProps) {
           )}
         </div>
 
-        {/* Right: actions */}
+        {/* Right: Admin location selector + actions */}
         <div className="flex items-center gap-2">
+          {/* Admin: location selector in header (for pages that need it) */}
+          {isAdmin && displayLocations.length > 0 && (
+            <div className="relative hidden lg:block">
+              <select
+                value={selectedLocationId ?? ''}
+                onChange={(e) => onLocationChange(e.target.value)}
+                className="appearance-none bg-surface-hover pr-7 pl-3 py-1.5
+                           text-xs font-medium text-text
+                           border border-border rounded-lg
+                           hover:bg-surface-hover focus:outline-none focus:ring-2 focus:ring-primary/20
+                           cursor-pointer transition-colors duration-fast"
+              >
+                {displayLocations.map((loc) => (
+                  <option key={loc.id} value={loc.id}>{loc.name}</option>
+                ))}
+              </select>
+              <ChevronDown size={12} className="absolute right-2 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+            </div>
+          )}
+
           <ThemeSwitcher />
 
           <NotificationBell />
@@ -104,7 +164,49 @@ export function Header({ selectedLocationId, onLocationChange }: HeaderProps) {
                       {user.firstName} {user.lastName}
                     </p>
                     <p className="text-xs text-text-secondary">{user.email}</p>
+                    <p className="text-[10px] text-primary font-bold uppercase tracking-wider mt-0.5">
+                      {user.role}
+                    </p>
                   </div>
+
+                  {/* Admin-specific quick links */}
+                  {isAdmin && (
+                    <div className="border-b border-border py-1">
+                      <NavLink
+                        to="/staff"
+                        onClick={() => setShowUserMenu(false)}
+                        className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-text-secondary
+                                   hover:bg-surface-hover transition-colors"
+                      >
+                        Staff Directory
+                      </NavLink>
+                      <NavLink
+                        to="/on-duty"
+                        onClick={() => setShowUserMenu(false)}
+                        className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-text-secondary
+                                   hover:bg-surface-hover transition-colors"
+                      >
+                        On Duty Now
+                      </NavLink>
+                      <NavLink
+                        to="/invitations"
+                        onClick={() => setShowUserMenu(false)}
+                        className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-text-secondary
+                                   hover:bg-surface-hover transition-colors"
+                      >
+                        Invitations
+                      </NavLink>
+                      <NavLink
+                        to="/settings"
+                        onClick={() => setShowUserMenu(false)}
+                        className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-text-secondary
+                                   hover:bg-surface-hover transition-colors"
+                      >
+                        Settings
+                      </NavLink>
+                    </div>
+                  )}
+
                   <button
                     onClick={logout}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-error

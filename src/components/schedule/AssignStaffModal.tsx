@@ -294,9 +294,9 @@ export function AssignStaffModal({
                       className="w-full text-left px-2 py-1.5 text-xs rounded
                                  hover:bg-info/10 transition-colors text-text"
                     >
-                      <span className="font-medium">{s.firstName} {s.lastName}</span>
+                      <span className="font-medium">{s.userName}</span>
                       <span className="text-text-secondary ml-2">
-                        {s.reasons.join(', ')}
+                        {s.reason}
                       </span>
                     </button>
                   ))}

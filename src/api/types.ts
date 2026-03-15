@@ -93,10 +93,8 @@ export interface ValidationResult {
   results: ConstraintResult[];
   suggestions?: {
     userId: string;
-    firstName: string;
-    lastName: string;
-    score: number;
-    reasons: string[];
+    userName: string;
+    reason: string;
   }[];
 }
 
