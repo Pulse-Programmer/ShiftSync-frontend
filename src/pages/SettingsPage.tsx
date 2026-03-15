@@ -19,7 +19,7 @@ const NOTIFICATION_TYPES = [
 
 export function SettingsPage() {
   const { user, locations } = useAuth();
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const updateUser = useUpdateUser();
   const { data: prefs } = useNotificationPreferences();
   const updatePrefs = useUpdateNotificationPreferences();

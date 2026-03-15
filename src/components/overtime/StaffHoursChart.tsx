@@ -45,8 +45,9 @@ export function StaffHoursChart({ data, onSelectUser }: StaffHoursChartProps) {
           data={chartData}
           margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
           onClick={(state) => {
-            if (state?.activePayload?.[0]) {
-              onSelectUser(state.activePayload[0].payload.id);
+            const payload = (state as { activePayload?: { payload: { id: string } }[] })?.activePayload;
+            if (payload?.[0]) {
+              onSelectUser(payload[0].payload.id);
             }
           }}
         >
@@ -84,7 +85,7 @@ export function StaffHoursChart({ data, onSelectUser }: StaffHoursChartProps) {
               fontSize: '12px',
               color: 'var(--color-text)',
             }}
-            formatter={(value: number) => [`${value.toFixed(1)}h`, 'Weekly Hours']}
+            formatter={(value) => [`${Number(value).toFixed(1)}h`, 'Weekly Hours']}
             cursor={{ fill: 'var(--color-surface-hover)', opacity: 0.5 }}
           />
           <ReferenceLine

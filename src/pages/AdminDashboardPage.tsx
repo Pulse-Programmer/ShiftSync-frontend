@@ -4,9 +4,6 @@ import {
   TrendingUp,
   ShieldCheck,
   DollarSign,
-  AlertTriangle,
-  MapPin,
-  ArrowUpRight,
 } from 'lucide-react';
 import { useLocations } from '../hooks/api/useLocations';
 import { useUsers } from '../hooks/api/useUsers';

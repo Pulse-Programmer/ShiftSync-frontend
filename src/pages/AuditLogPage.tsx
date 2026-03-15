@@ -12,7 +12,7 @@ interface OutletCtx {
 const ENTITY_TYPES = ['', 'shift', 'shift_assignment', 'schedule', 'swap_request', 'user', 'invitation'];
 
 export function AuditLogPage() {
-  const { selectedLocationId } = useOutletContext<OutletCtx>();
+  const { selectedLocationId: _selectedLocationId } = useOutletContext<OutletCtx>();
   const { data: locations } = useLocations();
 
   const [entityType, setEntityType] = useState('');

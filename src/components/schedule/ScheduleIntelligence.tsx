@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AlertTriangle, Clock, Users, Lightbulb } from 'lucide-react';
+import { AlertTriangle, Clock, Lightbulb } from 'lucide-react';
 import { useWeeklyOvertime } from '../../hooks/api/useOvertime';
 import type { ShiftResponse } from '../../hooks/api/useShifts';
 import { shiftDurationHours } from '../../utils/date';

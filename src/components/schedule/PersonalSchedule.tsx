@@ -140,7 +140,7 @@ export function PersonalSchedule({ weekStart, onWeekChange }: PersonalSchedulePr
               </p>
             </div>
           ) : (
-            activeShifts.map((shift, idx) => {
+            activeShifts.map((shift) => {
               const tz = (shift as unknown as { location_timezone?: string }).location_timezone
                 ?? (shift as unknown as { timezone?: string }).timezone
                 ?? 'UTC';

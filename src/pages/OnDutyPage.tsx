@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router-dom';
-import { Clock, MapPin, Users, Wifi, WifiOff } from 'lucide-react';
+import { Clock, Users, Wifi, WifiOff } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { useOnDutyStaff } from '../hooks/api/useOnDuty';
 import { useSocket } from '../hooks/useSocket';
