@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
         ),
       },
       { path: 'settings', element: <SettingsPage /> },
-      { path: '*', element: <Navigate to="/schedule" replace /> },
+      { path: '*', element: <Navigate to="/" replace /> },
     ],
   },
 ]);

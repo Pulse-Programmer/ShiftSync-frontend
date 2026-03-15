@@ -11,7 +11,7 @@ export function LoginPage() {
   const location = useLocation();
 
   // Already logged in — redirect
-  const from = (location.state as { from?: { pathname: string } })?.from?.pathname ?? '/schedule';
+  const from = (location.state as { from?: { pathname: string } })?.from?.pathname ?? '/';
   if (user) {
     navigate(from, { replace: true });
     return null;

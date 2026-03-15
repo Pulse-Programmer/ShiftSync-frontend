@@ -50,6 +50,8 @@ export interface Location {
   address: string | null;
   timezone: string;
   edit_cutoff_hours: number;
+  latitude: number | null;
+  longitude: number | null;
 }
 
 export interface Skill {

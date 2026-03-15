@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { useQueries } from '@tanstack/react-query';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import {
   Users,
   TrendingUp,
@@ -17,11 +18,19 @@ import type { WeeklyOvertimeEntry } from '../hooks/api/useOvertime';
 import { AdminOvertimeSummary } from '../components/admin/AdminOvertimeSummary';
 import { AdminFairnessGrid } from '../components/admin/AdminFairnessGrid';
 import { AdminAlerts } from '../components/admin/AdminAlerts';
+import { LocationMapCard } from '../components/admin/LocationMapCard';
 
 export function AdminDashboardPage() {
+  const navigate = useNavigate();
+  const { onLocationChange } = useOutletContext<{ onLocationChange: (id: string) => void }>();
   const { data: locations } = useLocations();
   const { data: users } = useUsers();
   const { data: pendingSwaps } = useSwapRequests({ status: 'pending_manager' });
+
+  const handleLocationClick = useCallback((locationId: string) => {
+    onLocationChange(locationId);
+    navigate('/schedule');
+  }, [onLocationChange, navigate]);
 
   const weekStart = useMemo(() => getWeekStart(), []);
   const weekLabel = useMemo(() => {
@@ -177,6 +186,11 @@ export function AdminDashboardPage() {
           sub={kpis.netOvertimeCost !== null ? `${Math.round(kpis.totalOvertimeHours)}h overtime this week` : 'Loading...'}
         />
       </div>
+
+      {/* Location Map */}
+      {locations && locations.length > 0 && (
+        <LocationMapCard locations={locations} onLocationClick={handleLocationClick} />
+      )}
 
       {/* Main grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
