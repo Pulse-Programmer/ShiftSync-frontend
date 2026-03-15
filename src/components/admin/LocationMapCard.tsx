@@ -56,7 +56,7 @@ function computeLabelOffsets(
     const p = sorted[i];
     let dy = -24;
     let dx = 0;
-    let anchor = 'middle';
+    let anchor: 'start' | 'middle' | 'end' = 'middle';
 
     // Check for nearby sibling — offset if within 60px
     for (let j = 0; j < sorted.length; j++) {
