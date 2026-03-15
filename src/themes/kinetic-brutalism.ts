@@ -2,7 +2,7 @@ import type { ThemeDefinition } from './types';
 
 export const kineticBrutalism: ThemeDefinition = {
   id: 'kinetic-brutalism',
-  name: 'Kinetic Brutalism',
+  name: 'Blueprint',
   description: 'Bold, high-contrast with hard edges and offset shadows',
   mode: 'dark',
   tokens: {
