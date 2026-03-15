@@ -4,6 +4,7 @@ import { LogOut, Clock, ChevronDown, LayoutDashboard, BarChart3, FileText, Shiel
 import { useAuth } from '../../hooks/useAuth';
 import { ThemeSwitcher } from '../ui/ThemeSwitcher';
 import { NotificationBell } from '../notifications/NotificationBell';
+import { UserAvatar } from '../ui/UserAvatar';
 import type { Location } from '../../api/types';
 import { api } from '../../api/client';
 
@@ -146,11 +147,12 @@ export function Header({ selectedLocationId, onLocationChange }: HeaderProps) {
               className="flex items-center gap-2 pl-2 pr-1 py-1 rounded-lg
                          hover:bg-surface-hover transition-colors duration-fast"
             >
-              <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-xs font-bold text-primary">
-                  {user.firstName[0]}{user.lastName[0]}
-                </span>
-              </div>
+              <UserAvatar
+                firstName={user.firstName}
+                lastName={user.lastName}
+                photoUrl={user.profilePhotoUrl}
+                size="sm"
+              />
               <ChevronDown size={14} className="text-text-secondary hidden sm:block" />
             </button>
 

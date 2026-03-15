@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { Settings, User, Bell, Palette } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Settings, User, Bell, Palette, Camera, Trash2 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
-import { useUpdateUser } from '../hooks/api/useUsers';
+import { useUpdateUser, useUploadPhoto, useDeletePhoto } from '../hooks/api/useUsers';
 import { useNotificationPreferences, useUpdateNotificationPreferences } from '../hooks/api/useNotifications';
+import { UserAvatar } from '../components/ui/UserAvatar';
 import { useTheme } from '../hooks/useTheme';
 import { themes } from '../themes/registry';
 import { AvailabilityEditor } from '../components/admin/AvailabilityEditor';
@@ -21,8 +22,11 @@ export function SettingsPage() {
   const { user, locations } = useAuth();
   const { setTheme } = useTheme();
   const updateUser = useUpdateUser();
+  const uploadPhoto = useUploadPhoto();
+  const deletePhoto = useDeletePhoto();
   const { data: prefs } = useNotificationPreferences();
   const updatePrefs = useUpdateNotificationPreferences();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [tab, setTab] = useState<Tab>('profile');
   const [firstName, setFirstName] = useState(user?.firstName ?? '');
@@ -31,6 +35,13 @@ export function SettingsPage() {
   const [availLocId, setAvailLocId] = useState<string>('');
 
   if (!user) return null;
+
+  function handlePhotoSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+    uploadPhoto.mutate({ userId: user.id, file });
+    e.target.value = '';
+  }
 
   async function handleSaveProfile() {
     if (!user) return;
@@ -85,15 +96,47 @@ export function SettingsPage() {
         <div className="space-y-4">
           <div className="p-4 bg-surface rounded-xl border border-border">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                <span className="text-lg font-bold text-primary">
-                  {user.firstName[0]}{user.lastName[0]}
-                </span>
+              <div className="relative group">
+                <UserAvatar
+                  firstName={user.firstName}
+                  lastName={user.lastName}
+                  photoUrl={user.profilePhotoUrl}
+                  size="lg"
+                />
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handlePhotoSelect}
+                />
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploadPhoto.isPending}
+                  className="absolute inset-0 rounded-full bg-black/0 group-hover:bg-black/40
+                             flex items-center justify-center opacity-0 group-hover:opacity-100
+                             transition-all cursor-pointer"
+                  title="Upload photo"
+                >
+                  <Camera size={16} className="text-white" />
+                </button>
               </div>
               <div>
                 <p className="text-sm font-semibold text-text">{user.firstName} {user.lastName}</p>
                 <p className="text-xs text-text-secondary">{user.email}</p>
-                <p className="text-xs text-text-secondary capitalize">{user.role}</p>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <p className="text-xs text-text-secondary capitalize">{user.role}</p>
+                  {user.profilePhotoUrl && (
+                    <button
+                      onClick={() => deletePhoto.mutate(user.id)}
+                      disabled={deletePhoto.isPending}
+                      className="text-xs text-error/70 hover:text-error flex items-center gap-0.5 transition-colors"
+                    >
+                      <Trash2 size={10} />
+                      Remove photo
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 

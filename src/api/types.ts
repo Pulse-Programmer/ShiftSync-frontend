@@ -20,6 +20,7 @@ export interface AuthUser {
   lastName: string;
   role: UserRole;
   organizationId: string;
+  profilePhotoUrl?: string | null;
 }
 
 export interface AuthResponse {
@@ -37,6 +38,7 @@ export interface UserProfile {
   desired_weekly_hours: number | null;
   phone: string | null;
   is_active: boolean;
+  profile_photo_url?: string | null;
   created_at: string;
   skills?: { id: string; name: string }[];
   locations?: { id: string; name: string; timezone: string }[];

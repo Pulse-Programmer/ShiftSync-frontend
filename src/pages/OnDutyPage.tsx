@@ -4,6 +4,7 @@ import { DateTime } from 'luxon';
 import { useOnDutyStaff } from '../hooks/api/useOnDuty';
 import { useSocket } from '../hooks/useSocket';
 import { formatInTimezone } from '../utils/date';
+import { UserAvatar } from '../components/ui/UserAvatar';
 
 interface OutletCtx {
   selectedLocationId: string | null;
@@ -92,11 +93,12 @@ export function OnDutyPage() {
             <div key={`${s.id}-${s.start_time}`} className="p-4 bg-surface rounded-xl border border-border card-hover">
               <div className="flex items-start justify-between gap-3 mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center">
-                    <span className="text-xs font-bold text-primary">
-                      {s.first_name[0]}{s.last_name[0]}
-                    </span>
-                  </div>
+                  <UserAvatar
+                    firstName={s.first_name}
+                    lastName={s.last_name}
+                    photoUrl={s.profile_photo_url}
+                    size="md"
+                  />
                   <div>
                     <p className="text-sm font-semibold text-text">
                       {s.first_name} {s.last_name}

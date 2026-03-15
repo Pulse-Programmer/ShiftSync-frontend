@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useUsers } from '../hooks/api/useUsers';
 import { UserDetailModal } from '../components/admin/UserDetailModal';
 import { ErrorState } from '../components/ui/ErrorState';
+import { UserAvatar } from '../components/ui/UserAvatar';
 
 export function StaffPage() {
   const { user } = useAuth();
@@ -100,11 +101,12 @@ export function StaffPage() {
                 >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                        <span className="text-xs font-bold text-primary">
-                          {u.first_name[0]}{u.last_name[0]}
-                        </span>
-                      </div>
+                      <UserAvatar
+                        firstName={u.first_name}
+                        lastName={u.last_name}
+                        photoUrl={u.profile_photo_url}
+                        size="md"
+                      />
                       <div>
                         <p className="font-medium text-text">{u.first_name} {u.last_name}</p>
                         <p className="text-xs text-text-secondary">{u.email}</p>

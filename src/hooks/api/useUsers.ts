@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../../api/client';
+import { api, uploadFile } from '../../api/client';
 import type { UserProfile, PaginatedResponse } from '../../api/types';
 
 export function useUsers(params?: { page?: number; pageSize?: number }) {
@@ -105,6 +105,29 @@ export function useDecertifyLocation() {
   return useMutation({
     mutationFn: (data: { userId: string; locationId: string }) =>
       api.put(`/users/${data.userId}/locations/${data.locationId}/decertify`),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['users'] });
+      qc.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
+}
+
+export function useUploadPhoto() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { userId: string; file: File }) =>
+      uploadFile<{ profilePhotoUrl: string }>(`/users/${data.userId}/photo`, data.file),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['users'] });
+      qc.invalidateQueries({ queryKey: ['user'] });
+    },
+  });
+}
+
+export function useDeletePhoto() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (userId: string) => api.delete(`/users/${userId}/photo`),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['users'] });
       qc.invalidateQueries({ queryKey: ['user'] });

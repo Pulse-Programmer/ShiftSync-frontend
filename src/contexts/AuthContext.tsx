@@ -33,6 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         lastName: profile.last_name,
         role: profile.role,
         organizationId: profile.organization_id,
+        profilePhotoUrl: profile.profile_photo_url,
       });
       setLocations(profile.locations ?? null);
     } catch {
