@@ -51,8 +51,9 @@ export function HoursDistributionChart({ data, onSelectUser }: HoursDistribution
           data={chartData}
           margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
           onClick={(state) => {
-            if (state?.activePayload?.[0]) {
-              onSelectUser(state.activePayload[0].payload.id);
+            const payload = (state as { activePayload?: { payload: { id: string } }[] })?.activePayload;
+            if (payload?.[0]) {
+              onSelectUser(payload[0].payload.id);
             }
           }}
         >
@@ -90,8 +91,8 @@ export function HoursDistributionChart({ data, onSelectUser }: HoursDistribution
               fontSize: '12px',
               color: 'var(--color-text)',
             }}
-            formatter={(value: number, name: string) => [
-              `${value.toFixed(1)}h`,
+            formatter={(value, name) => [
+              `${Number(value).toFixed(1)}h`,
               name === 'actual' ? 'Actual Hours' : 'Target Hours',
             ]}
             cursor={{ fill: 'var(--color-surface-hover)', opacity: 0.5 }}

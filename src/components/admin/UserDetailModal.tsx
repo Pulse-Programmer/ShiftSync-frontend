@@ -14,7 +14,6 @@ import { useSkills } from '../../hooks/api/useShifts';
 import { useLocations } from '../../hooks/api/useLocations';
 import {
   Save,
-  Plus,
   X,
   MapPin,
   Shield,

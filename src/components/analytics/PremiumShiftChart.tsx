@@ -72,7 +72,7 @@ export function PremiumShiftChart({ data }: PremiumShiftChartProps) {
               fontSize: '12px',
               color: 'var(--color-text)',
             }}
-            formatter={(value: number) => [`${value}`, 'Premium Shifts']}
+            formatter={(value) => [`${Number(value)}`, 'Premium Shifts']}
             cursor={{ fill: 'var(--color-surface-hover)', opacity: 0.5 }}
           />
           <ReferenceLine
