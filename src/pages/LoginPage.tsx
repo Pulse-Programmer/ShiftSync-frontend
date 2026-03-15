@@ -144,10 +144,10 @@ export function LoginPage() {
             <p className="text-xs text-text-secondary mb-3">Quick access (demo)</p>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { label: 'Admin', email: 'admin@coastaleats.com', pw: 'admin123' },
-                { label: 'Manager', email: 'manager.downtown@coastaleats.com', pw: 'manager123' },
-                { label: 'Staff', email: 'sarah.johnson@coastaleats.com', pw: 'staff123' },
-                { label: 'Multi-loc', email: 'mike.chen@coastaleats.com', pw: 'staff123' },
+                { label: 'Admin', email: 'admin@coastaleats.com', pw: 'CoastalAdmin@2026' },
+                { label: 'Manager', email: 'manager.downtown@coastaleats.com', pw: 'CoastalMgr@2026' },
+                { label: 'Staff', email: 'sarah.johnson@coastaleats.com', pw: 'CoastalStaff@2026' },
+                { label: 'Multi-loc', email: 'mike.chen@coastaleats.com', pw: 'CoastalStaff@2026' },
               ].map((d) => (
                 <button
                   key={d.label}

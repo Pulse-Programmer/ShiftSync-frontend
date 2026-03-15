@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 
 const MANAGER_EMAIL = 'manager.downtown@coastaleats.com';
-const MANAGER_PASSWORD = 'manager123';
+const MANAGER_PASSWORD = 'CoastalMgr@2026';
 
 // Early morning times to avoid overlapping with seed data shifts
 const SHIFT_START = '05:00';

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const MANAGER_EMAIL = 'manager.downtown@coastaleats.com';
-const MANAGER_PASSWORD = 'manager123';
+const MANAGER_PASSWORD = 'CoastalMgr@2026';
 
 async function loginAsManager(page: import('@playwright/test').Page) {
   await page.goto('/login');
