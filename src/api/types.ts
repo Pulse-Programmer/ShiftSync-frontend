@@ -1,3 +1,13 @@
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    pageSize: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
 export type UserRole = 'admin' | 'manager' | 'staff';
 export type ScheduleStatus = 'draft' | 'published';
 export type SwapType = 'swap' | 'drop';

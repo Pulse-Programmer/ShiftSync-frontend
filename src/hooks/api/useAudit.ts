@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../../api/client';
+import type { PaginatedResponse } from '../../api/types';
 
 export interface AuditLogEntry {
   id: string;
@@ -35,22 +36,23 @@ export function useAuditLogs(params?: {
   startDate?: string;
   endDate?: string;
   locationId?: string;
-  limit?: number;
-  offset?: number;
+  page?: number;
+  pageSize?: number;
 }) {
   const qs = new URLSearchParams();
   if (params?.entityType) qs.set('entityType', params.entityType);
   if (params?.startDate) qs.set('startDate', params.startDate);
   if (params?.endDate) qs.set('endDate', params.endDate);
   if (params?.locationId) qs.set('locationId', params.locationId);
-  if (params?.limit) qs.set('limit', String(params.limit));
-  if (params?.offset) qs.set('offset', String(params.offset));
+  if (params?.page) qs.set('page', String(params.page));
+  if (params?.pageSize) qs.set('pageSize', String(params.pageSize));
   const query_str = qs.toString();
 
   return useQuery({
     queryKey: ['audit-logs', query_str],
     queryFn: () =>
-      api.get<AuditLogEntry[]>(`/audit${query_str ? `?${query_str}` : ''}`),
+      api.get<PaginatedResponse<AuditLogEntry>>(`/audit${query_str ? `?${query_str}` : ''}`),
+    select: (res) => res.data,
   });
 }
 

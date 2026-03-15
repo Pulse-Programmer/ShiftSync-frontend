@@ -1,11 +1,18 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../api/client';
-import type { UserProfile } from '../../api/types';
+import type { UserProfile, PaginatedResponse } from '../../api/types';
 
-export function useUsers() {
+export function useUsers(params?: { page?: number; pageSize?: number }) {
+  const qs = new URLSearchParams();
+  if (params?.page) qs.set('page', String(params.page));
+  if (params?.pageSize) qs.set('pageSize', String(params.pageSize));
+  const query_str = qs.toString();
+
   return useQuery({
-    queryKey: ['users'],
-    queryFn: () => api.get<UserProfile[]>('/users'),
+    queryKey: ['users', query_str],
+    queryFn: () =>
+      api.get<PaginatedResponse<UserProfile>>(`/users${query_str ? `?${query_str}` : ''}`),
+    select: (res) => res.data,
   });
 }
 

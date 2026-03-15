@@ -30,7 +30,7 @@ export function AuditLogPage() {
     startDate,
     endDate,
     locationId: locationFilter || undefined,
-    limit: 100,
+    pageSize: 100,
   });
 
   function handleExport() {

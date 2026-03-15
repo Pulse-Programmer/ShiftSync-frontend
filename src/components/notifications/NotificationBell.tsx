@@ -15,7 +15,7 @@ export function NotificationBell() {
   const navigate = useNavigate();
 
   const { data: unread } = useUnreadCount();
-  const { data: notifications } = useNotifications({ limit: 10 });
+  const { data: notifications } = useNotifications({ pageSize: 10 });
   const markRead = useMarkRead();
   const markAllRead = useMarkAllRead();
 

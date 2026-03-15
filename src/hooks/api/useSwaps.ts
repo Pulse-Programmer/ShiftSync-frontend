@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../api/client';
+import type { PaginatedResponse } from '../../api/types';
 
 export interface SwapRequestResponse {
   id: string;
@@ -38,16 +39,19 @@ export interface AvailableShiftResponse {
   requester_last: string;
 }
 
-export function useSwapRequests(params?: { status?: string; locationId?: string }) {
+export function useSwapRequests(params?: { status?: string; locationId?: string; page?: number; pageSize?: number }) {
   const qs = new URLSearchParams();
   if (params?.status) qs.set('status', params.status);
   if (params?.locationId) qs.set('locationId', params.locationId);
+  if (params?.page) qs.set('page', String(params.page));
+  if (params?.pageSize) qs.set('pageSize', String(params.pageSize));
   const query_str = qs.toString();
 
   return useQuery({
     queryKey: ['swap-requests', query_str],
     queryFn: () =>
-      api.get<SwapRequestResponse[]>(`/swap-requests${query_str ? `?${query_str}` : ''}`),
+      api.get<PaginatedResponse<SwapRequestResponse>>(`/swap-requests${query_str ? `?${query_str}` : ''}`),
+    select: (res) => res.data,
   });
 }
 

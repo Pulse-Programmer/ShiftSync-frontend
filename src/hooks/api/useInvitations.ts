@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../api/client';
+import type { PaginatedResponse } from '../../api/types';
 
 export interface Invitation {
   id: string;
@@ -14,10 +15,17 @@ export interface Invitation {
   inviter_name?: string;
 }
 
-export function useInvitations() {
+export function useInvitations(params?: { page?: number; pageSize?: number }) {
+  const qs = new URLSearchParams();
+  if (params?.page) qs.set('page', String(params.page));
+  if (params?.pageSize) qs.set('pageSize', String(params.pageSize));
+  const query_str = qs.toString();
+
   return useQuery({
-    queryKey: ['invitations'],
-    queryFn: () => api.get<Invitation[]>('/invitations'),
+    queryKey: ['invitations', query_str],
+    queryFn: () =>
+      api.get<PaginatedResponse<Invitation>>(`/invitations${query_str ? `?${query_str}` : ''}`),
+    select: (res) => res.data,
   });
 }
 

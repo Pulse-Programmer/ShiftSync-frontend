@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../api/client';
-import type { AppNotification } from '../../api/types';
+import type { AppNotification, PaginatedResponse } from '../../api/types';
 
 export interface NotificationPreference {
   id: string;
@@ -10,17 +10,18 @@ export interface NotificationPreference {
   enabled: boolean;
 }
 
-export function useNotifications(params?: { limit?: number; offset?: number; unreadOnly?: boolean }) {
+export function useNotifications(params?: { page?: number; pageSize?: number; unreadOnly?: boolean }) {
   const qs = new URLSearchParams();
-  if (params?.limit) qs.set('limit', String(params.limit));
-  if (params?.offset) qs.set('offset', String(params.offset));
+  if (params?.page) qs.set('page', String(params.page));
+  if (params?.pageSize) qs.set('pageSize', String(params.pageSize));
   if (params?.unreadOnly) qs.set('unreadOnly', 'true');
   const query_str = qs.toString();
 
   return useQuery({
     queryKey: ['notifications', query_str],
     queryFn: () =>
-      api.get<AppNotification[]>(`/notifications${query_str ? `?${query_str}` : ''}`),
+      api.get<PaginatedResponse<AppNotification>>(`/notifications${query_str ? `?${query_str}` : ''}`),
+    select: (res) => res.data,
   });
 }
 

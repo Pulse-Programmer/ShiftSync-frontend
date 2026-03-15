@@ -16,7 +16,7 @@ const typeIcons: Record<string, string> = {
 };
 
 export function NotificationsPage() {
-  const { data: notifications, isLoading } = useNotifications({ limit: 50 });
+  const { data: notifications, isLoading } = useNotifications({ pageSize: 50 });
   const { data: unread } = useUnreadCount();
   const markRead = useMarkRead();
   const markAllRead = useMarkAllRead();
