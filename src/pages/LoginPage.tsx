@@ -1,11 +1,21 @@
 import { useState, type FormEvent } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Clock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { ThemeSwitcher } from '../components/ui/ThemeSwitcher';
 import { ApiError } from '../api/client';
 
 export function LoginPage() {
-  const { login } = useAuth();
+  const { user, login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Already logged in — redirect
+  const from = (location.state as { from?: { pathname: string } })?.from?.pathname ?? '/schedule';
+  if (user) {
+    navigate(from, { replace: true });
+    return null;
+  }
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +28,8 @@ export function LoginPage() {
     setLoading(true);
     try {
       await login(email, password);
+      navigate(from, { replace: true });
+      return;
     } catch (err) {
       if (err instanceof ApiError) {
         setError(typeof err.data === 'object' && err.data !== null && 'error' in err.data

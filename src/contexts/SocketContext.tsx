@@ -41,14 +41,18 @@ export function SocketProvider({ children }: { children: ReactNode }) {
 
     const socket = io(SOCKET_URL, {
       auth: { token },
-      transports: ['websocket', 'polling'],
+      transports: ['polling', 'websocket'],
       reconnection: true,
-      reconnectionDelay: 1000,
-      reconnectionAttempts: 10,
+      reconnectionDelay: 2000,
+      reconnectionAttempts: 5,
+      timeout: 5000,
     });
 
     socket.on('connect', () => setConnected(true));
     socket.on('disconnect', () => setConnected(false));
+    socket.on('connect_error', () => {
+      // Silently handle — will auto-retry per reconnection config
+    });
 
     socketRef.current = socket;
 
