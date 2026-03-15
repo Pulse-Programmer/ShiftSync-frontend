@@ -5,6 +5,7 @@ export interface OnDutyStaff {
   id: string;
   first_name: string;
   last_name: string;
+  profile_photo_url: string | null;
   start_time: string;
   end_time: string;
   skill: string | null;

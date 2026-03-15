@@ -48,8 +48,8 @@ function buildProjection(locations: { latitude: number; longitude: number }[]) {
 /** Detect label collisions and offset overlapping labels */
 function computeLabelOffsets(
   positions: { id: string; x: number; y: number }[]
-): Map<string, { dx: number; dy: number; anchor: string }> {
-  const offsets = new Map<string, { dx: number; dy: number; anchor: string }>();
+): Map<string, { dx: number; dy: number; anchor: 'start' | 'middle' | 'end' }> {
+  const offsets = new Map<string, { dx: number; dy: number; anchor: 'start' | 'middle' | 'end' }>();
   const sorted = [...positions].sort((a, b) => a.x - b.x);
 
   for (let i = 0; i < sorted.length; i++) {
