@@ -1,4 +1,4 @@
-# ShiftSync Frontend
+# ShiftSync Backend
 
 Multi-location staff scheduling API for **Coastal Eats**, a restaurant group operating 4 locations across 2 time zones. The platform addresses real-world workforce scheduling challenges: last-minute callouts, overtime cost visibility, fair shift distribution, cross-location staffing conflicts, and centralized schedule oversight.
 
@@ -15,16 +15,16 @@ Multi-location staff scheduling API for **Coastal Eats**, a restaurant group ope
 
 ## Demo Credentials
 
-| Role                    | Email                              | Password          |
-| ----------------------- | ---------------------------------- | ----------------- |
-| Admin                   | admin@coastaleats.com              | CoastalAdmin@2026 |
-| Manager (Downtown NY)   | manager.downtown@coastaleats.com   | CoastalMgr@2026   |
-| Manager (Midtown NY)    | manager.midtown@coastaleats.com    | CoastalMgr@2026   |
-| Manager (Westside LA)   | manager.westside@coastaleats.com   | CoastalMgr@2026   |
-| Manager (Beachfront LA) | manager.beachfront@coastaleats.com | CoastalMgr@2026   |
-| Staff                   | sarah.johnson@coastaleats.com      | CoastalStaff@2026 |
-| Staff (cross-timezone)  | mike.chen@coastaleats.com          | CoastalStaff@2026 |
-| Staff                   | james.wilson@coastaleats.com       | CoastalStaff@2026 |
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@coastaleats.com | CoastalAdmin@2026 |
+| Manager (Downtown NY) | manager.downtown@coastaleats.com | CoastalMgr@2026 |
+| Manager (Midtown NY) | manager.midtown@coastaleats.com | CoastalMgr@2026 |
+| Manager (Westside LA) | manager.westside@coastaleats.com | CoastalMgr@2026 |
+| Manager (Beachfront LA) | manager.beachfront@coastaleats.com | CoastalMgr@2026 |
+| Staff | sarah.johnson@coastaleats.com | CoastalStaff@2026 |
+| Staff (cross-timezone) | mike.chen@coastaleats.com | CoastalStaff@2026 |
+| Staff | james.wilson@coastaleats.com | CoastalStaff@2026 |
 
 All other staff use `CoastalStaff@2026` as password.
 
@@ -47,7 +47,6 @@ Pre-populated with realistic data covering edge cases across multiple locations:
 ## Roles & Permissions
 
 ### Admin
-
 - Corporate oversight across all locations
 - Creates/manages the organization, locations, and skills
 - Invites managers and staff
@@ -55,7 +54,6 @@ Pre-populated with realistic data covering edge cases across multiple locations:
 - Can override any constraint
 
 ### Manager
-
 - Scoped to assigned location(s) — Casey Martinez manages both Westside and Beachfront
 - Creates schedules, defines shifts with required skills and headcount, assigns staff
 - Publishes/unpublishes schedules (before configurable 48-hour cutoff)
@@ -63,7 +61,6 @@ Pre-populated with realistic data covering edge cases across multiple locations:
 - Views overtime dashboard and fairness analytics for their locations
 
 ### Staff
-
 - Views published schedules for certified locations
 - Sets recurring and exception availability per location
 - Submits swap requests (peer-to-peer) and drop requests (max 3 pending)
@@ -82,16 +79,16 @@ Assignment validation runs through a dedicated constraint engine (`src/engine/`)
 
 **8 constraints evaluated in parallel:**
 
-| Constraint             | Severity                | Description                                |
-| ---------------------- | ----------------------- | ------------------------------------------ |
-| DOUBLE_BOOKING         | error                   | No overlapping shifts across any location  |
-| REST_PERIOD            | error                   | Minimum 10 hours between shifts            |
-| SKILL_MATCH            | error                   | Staff must have the required skill         |
-| LOCATION_CERTIFICATION | error                   | Staff must be certified at the location    |
-| AVAILABILITY           | error                   | Shift must fall within availability window |
-| DAILY_HOURS            | warn >8h, error >12h    | Daily hour limits                          |
-| WEEKLY_HOURS           | warn >=35h, error >=40h | Weekly hour / overtime threshold           |
-| CONSECUTIVE_DAYS       | warn 6th, error 7th     | Consecutive working day limits             |
+| Constraint | Severity | Description |
+|-----------|----------|-------------|
+| DOUBLE_BOOKING | error | No overlapping shifts across any location |
+| REST_PERIOD | error | Minimum 10 hours between shifts |
+| SKILL_MATCH | error | Staff must have the required skill |
+| LOCATION_CERTIFICATION | error | Staff must be certified at the location |
+| AVAILABILITY | error | Shift must fall within availability window |
+| DAILY_HOURS | warn >8h, error >12h | Daily hour limits |
+| WEEKLY_HOURS | warn >=35h, error >=40h | Weekly hour / overtime threshold |
+| CONSECUTIVE_DAYS | warn 6th, error 7th | Consecutive working day limits |
 
 Each constraint returns a structured `ConstraintResult` with severity, message, and details. The validator aggregates results — `error` severity blocks the assignment, `warning` allows it with feedback.
 
@@ -124,7 +121,6 @@ DROP:   pending_manager → approved | rejected | expired
 Tracks and warns about weekly hours approaching 40h (warning at 35+), daily hours exceeding 8h (warning) or 12h (hard block), 6th consecutive day (warning), and 7th consecutive day (requires manager override with documented reason).
 
 **Overtime visualization includes:**
-
 - Dashboard showing projected overtime costs for the current week
 - Highlighting which specific assignments push staff into overtime
 - Per-user weekly hour breakdown with drill-down detail
@@ -139,7 +135,6 @@ Tracks and warns about weekly hours approaching 40h (warning at 35+), daily hour
 ### 6. Real-Time Features (WebSocket)
 
 Socket.io connections authenticate via JWT on handshake. Users auto-join rooms:
-
 - `user:{id}` — personal notifications
 - `location:{id}` — location-wide events (for each certified location)
 - `managers:{locationId}` — manager-only events
@@ -177,119 +172,110 @@ Events emitted: `notification:new`, `schedule:published`, `shift:updated`, `swap
 ## API Endpoints
 
 ### Auth
-
-| Method | Path                    | Description                          |
-| ------ | ----------------------- | ------------------------------------ |
-| POST   | /api/auth/register      | Register organization + admin        |
-| POST   | /api/auth/login         | Login (returns JWT)                  |
-| POST   | /api/auth/accept-invite | Accept invitation and create account |
-| GET    | /api/auth/me            | Get current user profile             |
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | /api/auth/register | Register organization + admin |
+| POST | /api/auth/login | Login (returns JWT) |
+| POST | /api/auth/accept-invite | Accept invitation and create account |
+| GET | /api/auth/me | Get current user profile |
 
 ### Users & Availability
-
-| Method | Path                                  | Description                           |
-| ------ | ------------------------------------- | ------------------------------------- |
-| GET    | /api/users                            | List users (role-scoped)              |
-| GET    | /api/users/:id                        | Get user details                      |
-| PUT    | /api/users/:id                        | Update user                           |
-| PUT    | /api/users/:id/deactivate             | Deactivate user                       |
-| PUT    | /api/users/:id/reactivate             | Reactivate user                       |
-| POST   | /api/users/:id/skills                 | Assign skill                          |
-| DELETE | /api/users/:id/skills/:skillId        | Remove skill                          |
-| POST   | /api/users/:id/locations              | Certify at location                   |
-| DELETE | /api/users/:id/locations/:locationId  | Decertify from location               |
-| GET    | /api/users/:id/availability           | Get availability                      |
-| GET    | /api/users/:id/availability/effective | Get effective availability for a date |
-| POST   | /api/users/:id/availability           | Create availability rule              |
-| PUT    | /api/users/:id/availability/:availId  | Update availability                   |
-| DELETE | /api/users/:id/availability/:availId  | Delete availability                   |
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/users | List users (role-scoped) |
+| GET | /api/users/:id | Get user details |
+| PUT | /api/users/:id | Update user |
+| PUT | /api/users/:id/deactivate | Deactivate user |
+| PUT | /api/users/:id/reactivate | Reactivate user |
+| POST | /api/users/:id/skills | Assign skill |
+| DELETE | /api/users/:id/skills/:skillId | Remove skill |
+| POST | /api/users/:id/locations | Certify at location |
+| DELETE | /api/users/:id/locations/:locationId | Decertify from location |
+| GET | /api/users/:id/availability | Get availability |
+| GET | /api/users/:id/availability/effective | Get effective availability for a date |
+| POST | /api/users/:id/availability | Create availability rule |
+| PUT | /api/users/:id/availability/:availId | Update availability |
+| DELETE | /api/users/:id/availability/:availId | Delete availability |
 
 ### Locations
-
-| Method | Path                       | Description                 |
-| ------ | -------------------------- | --------------------------- |
-| GET    | /api/locations             | List locations              |
-| GET    | /api/locations/:id         | Get location details        |
-| POST   | /api/locations             | Create location             |
-| PUT    | /api/locations/:id         | Update location             |
-| GET    | /api/locations/:id/staff   | Get location staff          |
-| GET    | /api/locations/:id/on-duty | Get currently on-duty staff |
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/locations | List locations |
+| GET | /api/locations/:id | Get location details |
+| POST | /api/locations | Create location |
+| PUT | /api/locations/:id | Update location |
+| GET | /api/locations/:id/staff | Get location staff |
+| GET | /api/locations/:id/on-duty | Get currently on-duty staff |
 
 ### Schedules & Shifts
-
-| Method | Path                                  | Description                    |
-| ------ | ------------------------------------- | ------------------------------ |
-| GET    | /api/schedules/location/:locationId   | Get schedules by location      |
-| GET    | /api/schedules/:id                    | Get schedule                   |
-| POST   | /api/schedules                        | Create schedule                |
-| PUT    | /api/schedules/:id/publish            | Publish schedule               |
-| PUT    | /api/schedules/:id/unpublish          | Unpublish (before cutoff)      |
-| GET    | /api/shifts/schedule/:scheduleId      | Get shifts for schedule        |
-| GET    | /api/shifts/:id                       | Get shift details              |
-| POST   | /api/shifts                           | Create shift                   |
-| PUT    | /api/shifts/:id                       | Update shift                   |
-| DELETE | /api/shifts/:id                       | Delete shift                   |
-| POST   | /api/shifts/:id/assign                | Assign staff                   |
-| POST   | /api/shifts/:id/preview               | Preview assignment constraints |
-| DELETE | /api/shifts/:id/assign/:userId        | Unassign staff                 |
-| GET    | /api/shifts/user/schedule             | Get current user's schedule    |
-| GET    | /api/shifts/location/:locationId/view | Location schedule view         |
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/schedules/location/:locationId | Get schedules by location |
+| GET | /api/schedules/:id | Get schedule |
+| POST | /api/schedules | Create schedule |
+| PUT | /api/schedules/:id/publish | Publish schedule |
+| PUT | /api/schedules/:id/unpublish | Unpublish (before cutoff) |
+| GET | /api/shifts/schedule/:scheduleId | Get shifts for schedule |
+| GET | /api/shifts/:id | Get shift details |
+| POST | /api/shifts | Create shift |
+| PUT | /api/shifts/:id | Update shift |
+| DELETE | /api/shifts/:id | Delete shift |
+| POST | /api/shifts/:id/assign | Assign staff |
+| POST | /api/shifts/:id/preview | Preview assignment constraints |
+| DELETE | /api/shifts/:id/assign/:userId | Unassign staff |
+| GET | /api/shifts/user/schedule | Get current user's schedule |
+| GET | /api/shifts/location/:locationId/view | Location schedule view |
 
 ### Swap Requests
-
-| Method | Path                           | Description                 |
-| ------ | ------------------------------ | --------------------------- |
-| POST   | /api/swap-requests             | Create swap or drop request |
-| GET    | /api/swap-requests             | List swap requests          |
-| GET    | /api/swap-requests/available   | Available shifts for pickup |
-| PUT    | /api/swap-requests/:id/accept  | Peer accepts swap           |
-| PUT    | /api/swap-requests/:id/approve | Manager approves            |
-| PUT    | /api/swap-requests/:id/reject  | Manager rejects             |
-| PUT    | /api/swap-requests/:id/cancel  | Requester cancels           |
-| POST   | /api/swap-requests/:id/pickup  | Pick up dropped shift       |
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | /api/swap-requests | Create swap or drop request |
+| GET | /api/swap-requests | List swap requests |
+| GET | /api/swap-requests/available | Available shifts for pickup |
+| PUT | /api/swap-requests/:id/accept | Peer accepts swap |
+| PUT | /api/swap-requests/:id/approve | Manager approves |
+| PUT | /api/swap-requests/:id/reject | Manager rejects |
+| PUT | /api/swap-requests/:id/cancel | Requester cancels |
+| POST | /api/swap-requests/:id/pickup | Pick up dropped shift |
 
 ### Overtime & Analytics
-
-| Method | Path                             | Description                |
-| ------ | -------------------------------- | -------------------------- |
-| GET    | /api/overtime/weekly             | Weekly overview            |
-| GET    | /api/overtime/user/:id           | User weekly detail         |
-| GET    | /api/overtime/projections        | Overtime projections       |
-| GET    | /api/analytics/fairness          | Fairness report            |
-| GET    | /api/analytics/fairness-score    | Fairness score + breakdown |
-| GET    | /api/analytics/staff/:id/history | Staff shift history        |
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/overtime/weekly | Weekly overview |
+| GET | /api/overtime/user/:id | User weekly detail |
+| GET | /api/overtime/projections | Overtime projections |
+| GET | /api/analytics/fairness | Fairness report |
+| GET | /api/analytics/fairness-score | Fairness score + breakdown |
+| GET | /api/analytics/staff/:id/history | Staff shift history |
 
 ### Notifications
-
-| Method | Path                            | Description        |
-| ------ | ------------------------------- | ------------------ |
-| GET    | /api/notifications              | Get notifications  |
-| GET    | /api/notifications/unread-count | Unread count       |
-| PUT    | /api/notifications/:id/read     | Mark as read       |
-| PUT    | /api/notifications/read-all     | Mark all as read   |
-| GET    | /api/notifications/preferences  | Get preferences    |
-| PUT    | /api/notifications/preferences  | Update preferences |
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/notifications | Get notifications |
+| GET | /api/notifications/unread-count | Unread count |
+| PUT | /api/notifications/:id/read | Mark as read |
+| PUT | /api/notifications/read-all | Mark all as read |
+| GET | /api/notifications/preferences | Get preferences |
+| PUT | /api/notifications/preferences | Update preferences |
 
 ### Audit
-
-| Method | Path                 | Description          |
-| ------ | -------------------- | -------------------- |
-| GET    | /api/audit           | Query audit logs     |
-| GET    | /api/audit/shift/:id | Shift change history |
-| GET    | /api/audit/export    | Export as CSV        |
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/audit | Query audit logs |
+| GET | /api/audit/shift/:id | Shift change history |
+| GET | /api/audit/export | Export as CSV |
 
 ### Skills & Invitations
-
-| Method | Path                        | Description       |
-| ------ | --------------------------- | ----------------- |
-| GET    | /api/skills                 | List skills       |
-| POST   | /api/skills                 | Create skill      |
-| DELETE | /api/skills/:id             | Delete skill      |
-| POST   | /api/invitations            | Create invitation |
-| GET    | /api/invitations            | List invitations  |
-| PUT    | /api/invitations/:id/revoke | Revoke invitation |
-| POST   | /api/invitations/:id/resend | Resend invitation |
-| GET    | /api/health                 | Health check      |
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | /api/skills | List skills |
+| POST | /api/skills | Create skill |
+| DELETE | /api/skills/:id | Delete skill |
+| POST | /api/invitations | Create invitation |
+| GET | /api/invitations | List invitations |
+| PUT | /api/invitations/:id/revoke | Revoke invitation |
+| POST | /api/invitations/:id/resend | Resend invitation |
+| GET | /api/health | Health check |
 
 ## Architecture
 
@@ -311,7 +297,6 @@ When constraints fail, the **suggester** (`src/engine/suggester.ts`) automatical
 ### Real-time (WebSocket)
 
 Socket.io connections authenticate via JWT on handshake. Users auto-join rooms:
-
 - `user:{id}` — personal notifications
 - `location:{id}` — location-wide events (for each certified location)
 - `managers:{locationId}` — manager-only events
@@ -357,6 +342,37 @@ Shift assignments use an INSERT-with-NOT-EXISTS pattern to prevent concurrent do
 - Audit log export is synchronous CSV generation (would need streaming for large datasets)
 - Invitation tokens use UUID v4 (not cryptographically signed, but sufficiently random)
 - WebSocket reconnection handling depends on client implementation
+
+## Future Enhancements
+
+Given more time, these are the features and capabilities I would prioritize next:
+
+### Scheduling & Operations
+- **AI-powered auto-scheduling** — constraint solver that generates optimal schedules respecting skills, availability, fairness targets, and overtime limits
+- **Shift marketplace** — staff post shifts for pickup or trade without requiring manager approval for pre-validated swaps
+- **Recurring schedule templates** — clone a "golden week" pattern and apply it across future weeks with one click
+- **Break & meal period tracking** — log breaks within shifts with compliance alerts for jurisdictions that mandate rest periods
+- **Multi-week publishing** — publish 2-4 weeks ahead with automatic conflict detection across the full horizon
+
+### Staff Experience
+- **Availability preferences** — beyond hard availability, let staff rank preferred shift times and days
+- **Time-off / PTO requests** — integrated request workflow with auto-approval rules based on coverage thresholds
+- **Push notifications** — native mobile push for shift reminders, swap approvals, and last-minute schedule changes
+- **Mobile clock-in/clock-out** — GPS-verified time tracking with geofencing around each location
+- **Shift feedback** — staff rate their shift experience, surfacing patterns for managers (e.g., consistently understaffed Friday evenings)
+
+### Analytics & Intelligence
+- **Demand forecasting** — predict staffing needs from historical patterns, local events, and weather data
+- **Labor cost modeling** — see projected labor cost impact before publishing a schedule, with what-if scenario support
+- **Turnover risk scoring** — flag staff likely to churn based on scheduling patterns (overtime frequency, denied requests, undesirable shift concentration)
+- **Custom report builder** — drag-and-drop report designer with scheduled PDF/CSV export
+
+### Platform & Admin
+- **Granular permissions** — role-based access control beyond the current 3-tier model (e.g., senior staff, shift lead, regional manager)
+- **SSO / OAuth** — Google and Microsoft integration for enterprise onboarding
+- **Comprehensive audit dashboard** — visual timeline of all schedule changes with diff views and rollback capability
+- **Multi-organization support** — franchise model where each franchisee manages independently under a corporate umbrella
+- **Integration API** — webhooks and REST API for third-party systems (payroll, POS, HR platforms)
 
 ## Database Schema
 
