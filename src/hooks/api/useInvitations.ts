@@ -8,6 +8,7 @@ export interface Invitation {
   role: 'manager' | 'staff';
   location_ids: string[];
   skill_ids: string[];
+  token: string;
   invited_by: string;
   created_at: string;
   expires_at: string;

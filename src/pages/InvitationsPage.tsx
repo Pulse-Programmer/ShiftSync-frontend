@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Send, Trash2, RefreshCw, Check, Clock } from 'lucide-react';
+import { Mail, Send, Trash2, RefreshCw, Check, Clock, Link2, CheckCheck } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { useAuth } from '../hooks/useAuth';
 import {
@@ -22,6 +22,7 @@ export function InvitationsPage() {
   const resendInvite = useResendInvitation();
 
   const [showCreate, setShowCreate] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState<'staff' | 'manager'>('staff');
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
@@ -92,6 +93,19 @@ export function InvitationsPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => {
+                        const link = `${window.location.origin}/accept-invite?token=${inv.token}`;
+                        navigator.clipboard.writeText(link);
+                        setCopiedId(inv.id);
+                        setTimeout(() => setCopiedId(null), 2000);
+                      }}
+                      className="p-1.5 rounded-lg border border-border text-text-secondary
+                                 hover:bg-surface-hover transition-colors"
+                      title="Copy invite link"
+                    >
+                      {copiedId === inv.id ? <CheckCheck size={12} className="text-success" /> : <Link2 size={12} />}
+                    </button>
                     <button
                       onClick={() => resendInvite.mutate(inv.id)}
                       disabled={resendInvite.isPending}

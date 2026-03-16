@@ -12,6 +12,7 @@ import { AnalyticsPage } from '../pages/AnalyticsPage';
 import { SettingsPage } from '../pages/SettingsPage';
 import { AuditLogPage } from '../pages/AuditLogPage';
 import { InvitationsPage } from '../pages/InvitationsPage';
+import { AcceptInvitePage } from '../pages/AcceptInvitePage';
 import { OnDutyPage } from '../pages/OnDutyPage';
 
 export const router = createBrowserRouter([
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
   {
     path: '/docs',
     element: <DocumentationPage />,
+  },
+  {
+    path: '/accept-invite',
+    element: <AcceptInvitePage />,
   },
   {
     path: '/',

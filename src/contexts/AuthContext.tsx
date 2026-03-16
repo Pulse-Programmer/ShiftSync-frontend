@@ -13,6 +13,7 @@ export interface AuthContextValue {
   locations: { id: string; name: string; timezone: string }[] | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
+  acceptInvite: (token: string, firstName: string, lastName: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -63,6 +64,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [fetchProfile],
   );
 
+  const acceptInvite = useCallback(
+    async (token: string, firstName: string, lastName: string, password: string) => {
+      const res = await api.post<AuthResponse>('/auth/accept-invite', {
+        token,
+        firstName,
+        lastName,
+        password,
+      });
+      setToken(res.token);
+      setUser(res.user);
+      await fetchProfile();
+    },
+    [fetchProfile],
+  );
+
   const logout = useCallback(() => {
     setToken(null);
     setUser(null);
@@ -70,7 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, locations, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ user, locations, isLoading, login, acceptInvite, logout }}>
       {children}
     </AuthContext.Provider>
   );
