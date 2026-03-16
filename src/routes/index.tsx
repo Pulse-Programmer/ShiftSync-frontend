@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { AppShell } from '../components/layout/AppShell';
 import { RequireAuth, RequireRole } from './guards';
 import { LoginPage } from '../pages/LoginPage';
+import { DocumentationPage } from '../pages/DocumentationPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import { SchedulePage } from '../pages/SchedulePage';
 import { StaffPage } from '../pages/StaffPage';
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />,
+  },
+  {
+    path: '/docs',
+    element: <DocumentationPage />,
   },
   {
     path: '/',

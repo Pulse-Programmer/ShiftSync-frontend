@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Clock, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { Clock, Eye, EyeOff, AlertCircle, BookOpen, Github } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { ThemeSwitcher } from '../components/ui/ThemeSwitcher';
 import { ApiError } from '../api/client';
@@ -162,6 +162,37 @@ export function LoginPage() {
                   <span className="truncate block">{d.email.split('@')[0]}</span>
                 </button>
               ))}
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <Link
+              to="/docs"
+              className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-primary-hover transition-colors font-medium"
+            >
+              <BookOpen size={14} />
+              Documentation
+            </Link>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://github.com/Pulse-Programmer/ShiftSync-backend"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-text-secondary hover:text-text transition-colors"
+              >
+                <Github size={13} />
+                Backend
+              </a>
+              <span className="text-border">|</span>
+              <a
+                href="https://github.com/Pulse-Programmer/ShiftSync-frontend"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs text-text-secondary hover:text-text transition-colors"
+              >
+                <Github size={13} />
+                Frontend
+              </a>
             </div>
           </div>
         </div>

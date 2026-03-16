@@ -119,4 +119,136 @@
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
+
+  /* Prose — theme-aware markdown styling */
+  .prose {
+    line-height: 1.75;
+    color: rgb(var(--color-text-rgb) / 0.85);
+  }
+  .prose h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: rgb(var(--color-text-rgb));
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgb(var(--color-border-rgb) / 0.15);
+  }
+  .prose h1:first-child { margin-top: 0; }
+  .prose h2 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: rgb(var(--color-text-rgb));
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid rgb(var(--color-border-rgb) / 0.1);
+  }
+  .prose h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgb(var(--color-text-rgb));
+    margin: 1.5rem 0 0.5rem;
+  }
+  .prose h4 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgb(var(--color-text-rgb));
+    margin: 1.25rem 0 0.4rem;
+  }
+  .prose p {
+    margin: 0.75rem 0;
+    font-size: 0.875rem;
+  }
+  .prose a {
+    color: rgb(var(--color-primary-rgb));
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .prose a:hover {
+    text-decoration: underline;
+  }
+  .prose strong {
+    font-weight: 700;
+    color: rgb(var(--color-text-rgb));
+  }
+  .prose ul, .prose ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    font-size: 0.875rem;
+  }
+  .prose ul { list-style-type: disc; }
+  .prose ol { list-style-type: decimal; }
+  .prose li { margin: 0.25rem 0; }
+  .prose li > ul, .prose li > ol { margin: 0.15rem 0; }
+  .prose hr {
+    border: none;
+    border-top: 1px solid rgb(var(--color-border-rgb) / 0.15);
+    margin: 2rem 0;
+  }
+  .prose blockquote {
+    border-left: 3px solid rgb(var(--color-primary-rgb) / 0.4);
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    color: rgb(var(--color-text-secondary-rgb));
+    background: rgb(var(--color-surface-rgb));
+    border-radius: 0 var(--radius-default) var(--radius-default) 0;
+  }
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: rgb(var(--color-surface-rgb));
+    border: 1px solid rgb(var(--color-border-rgb) / 0.15);
+    padding: 0.15em 0.35em;
+    border-radius: var(--radius-sm);
+  }
+  .prose pre {
+    background: rgb(var(--color-surface-rgb));
+    border: 1px solid rgb(var(--color-border-rgb) / 0.15);
+    border-radius: var(--radius-default);
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .prose pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+  }
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.8rem;
+  }
+  .prose thead th {
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgb(var(--color-text-secondary-rgb));
+    padding: 0.6rem 0.75rem;
+    border-bottom: 2px solid rgb(var(--color-border-rgb) / 0.2);
+    background: rgb(var(--color-surface-rgb));
+  }
+  .prose tbody td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid rgb(var(--color-border-rgb) / 0.08);
+    vertical-align: top;
+  }
+  .prose tbody tr:hover {
+    background: rgb(var(--color-surface-rgb) / 0.5);
+  }
+  .prose del {
+    color: rgb(var(--color-text-secondary-rgb));
+    text-decoration: line-through;
+  }
 }
