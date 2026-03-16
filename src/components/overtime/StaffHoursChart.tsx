@@ -85,6 +85,8 @@ export function StaffHoursChart({ data, onSelectUser }: StaffHoursChartProps) {
               fontSize: '12px',
               color: 'var(--color-text)',
             }}
+            itemStyle={{ color: 'var(--color-text)' }}
+            labelStyle={{ color: 'var(--color-text-secondary)' }}
             formatter={(value) => [`${Number(value).toFixed(1)}h`, 'Weekly Hours']}
             cursor={{ fill: 'var(--color-surface-hover)', opacity: 0.5 }}
           />
