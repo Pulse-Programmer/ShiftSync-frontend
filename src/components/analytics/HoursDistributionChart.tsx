@@ -91,6 +91,8 @@ export function HoursDistributionChart({ data, onSelectUser }: HoursDistribution
               fontSize: '12px',
               color: 'var(--color-text)',
             }}
+            itemStyle={{ color: 'var(--color-text)' }}
+            labelStyle={{ color: 'var(--color-text-secondary)' }}
             formatter={(value, name) => [
               `${Number(value).toFixed(1)}h`,
               name === 'actual' ? 'Actual Hours' : 'Target Hours',
